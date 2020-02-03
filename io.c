@@ -2,11 +2,11 @@
 #include <string.h>
 #include "config.h"
 
-void getInput(const char input[], size_t linelength, char target[][linelength])
+void getInput(const char input[], char target[N_LINES][LINE_LENGTH])
 {
     FILE *fp;
 
     fp = fopen(input, "r");
-    for (size_t i = 0; fgets(target[i], linelength, fp); i++) target[i][strlen(target[i]) - 1] = '\0';
+    for (size_t i = 0; fgets(target[i], LINE_LENGTH, fp); i++) target[i][strlen(target[i]) - 1] = '\0';
     fclose(fp);
 };
