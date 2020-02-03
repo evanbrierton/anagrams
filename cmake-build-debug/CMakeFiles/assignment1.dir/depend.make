@@ -7,6 +7,7 @@ CMakeFiles/assignment1.dir/io.c.o: ../io.c
 CMakeFiles/assignment1.dir/main.c.o: ../config.h
 CMakeFiles/assignment1.dir/main.c.o: ../io.h
 CMakeFiles/assignment1.dir/main.c.o: ../main.c
+CMakeFiles/assignment1.dir/main.c.o: ../sort.h
 
 CMakeFiles/assignment1.dir/sort.c.o: ../config.h
 CMakeFiles/assignment1.dir/sort.c.o: ../sort.c

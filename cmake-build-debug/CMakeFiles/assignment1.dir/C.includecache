@@ -23,21 +23,25 @@ config.h
 /Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/config.h
 
 /Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/main.c
-stdio.h
--
+config.h
+/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/config.h
+io.h
+/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/io.h
+sort.h
+/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.h
+
+/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.c
 string.h
+-
+stdio.h
 -
 stdlib.h
 -
 config.h
 /Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/config.h
-io.h
-/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/io.h
 
-/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.c
+/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.h
 stdio.h
--
-string.h
 -
 config.h
 /Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/config.h

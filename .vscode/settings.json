@@ -1,6 +1,8 @@
 {
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
   "files.associations": {
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "stdbool.h": "c",
+    "string.h": "c"
   }
 }
