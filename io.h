@@ -4,6 +4,6 @@
 #ifndef IO_H
 #define IO_H
 
-void getInput(const char input[], size_t nlines, size_t linelength, char target[][linelength]);
+void getInput(const char input[], size_t linelength, char target[][linelength]);
 
 #endif
