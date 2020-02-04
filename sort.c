@@ -25,19 +25,19 @@ char * cloneString(char str[])
   return clone;
 }
 
-void toLowerCase(char str[])
+char * toLowerCase(char str[])
 { 
+  char * lowerCaseStr = newString(strlen(str));
   for (size_t i = 0; i < strlen(str); i++)
-    str[i] = ('A' <= str[i] && str[i] <= 'Z') ? str[i] + 'a' - 'A' : str[i];
+    lowerCaseStr[i] = ('A' <= str[i] && str[i] <= 'Z') ? str[i] + 'a' - 'A' : str[i];
+  return lowerCaseStr;
 }
 
 int compare(char str1[], char str2[])
 {
   /* Assignment of lowercase strings to variables so that memory allocated by malloc is released
   when the scope is exited */
-  char * lowerCaseStr1 = cloneString(str1), * lowerCaseStr2 = cloneString(str2);
-  toLowerCase(lowerCaseStr1);
-  toLowerCase(lowerCaseStr2);
+  char * lowerCaseStr1 = toLowerCase(str1), * lowerCaseStr2 = toLowerCase(str2);
   return strcmp(lowerCaseStr1, lowerCaseStr2);
 }
 

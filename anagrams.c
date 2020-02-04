@@ -60,8 +60,7 @@ void processStrings(char target[N_LINES][LINE_LENGTH], char strings[N_LINES][LIN
 {
   for (size_t i = 0; i < N_LINES; i++)
   {
-    char * clone = cleanString(cloneString(strings[i]));
-    toLowerCase(clone);
+    char * clone = toLowerCase(cleanString(strings[i]));
     sortString(clone, 0, strlen(clone) - 1);
     strcpy(target[i], clone);
   }
