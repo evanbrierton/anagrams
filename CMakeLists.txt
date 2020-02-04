@@ -3,4 +3,4 @@ project(assignment1 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(assignment1 main.c io.c sort.c)
+add_executable(assignment1 main.c io.c sort.c anagrams.c)

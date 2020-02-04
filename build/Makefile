@@ -123,6 +123,33 @@ assignment1/fast:
 	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/build
 .PHONY : assignment1/fast
 
+anagrams.o: anagrams.c.o
+
+.PHONY : anagrams.o
+
+# target to build an object file
+anagrams.c.o:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/anagrams.c.o
+.PHONY : anagrams.c.o
+
+anagrams.i: anagrams.c.i
+
+.PHONY : anagrams.i
+
+# target to preprocess a source file
+anagrams.c.i:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/anagrams.c.i
+.PHONY : anagrams.c.i
+
+anagrams.s: anagrams.c.s
+
+.PHONY : anagrams.s
+
+# target to generate assembly for a file
+anagrams.c.s:
+	$(MAKE) -f CMakeFiles/assignment1.dir/build.make CMakeFiles/assignment1.dir/anagrams.c.s
+.PHONY : anagrams.c.s
+
 io.o: io.c.o
 
 .PHONY : io.o
@@ -213,6 +240,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... assignment1"
+	@echo "... anagrams.o"
+	@echo "... anagrams.i"
+	@echo "... anagrams.s"
 	@echo "... io.o"
 	@echo "... io.i"
 	@echo "... io.s"

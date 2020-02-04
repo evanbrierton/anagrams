@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/assignment1.dir/anagrams.c.o"
   "CMakeFiles/assignment1.dir/io.c.o"
   "CMakeFiles/assignment1.dir/main.c.o"
   "CMakeFiles/assignment1.dir/sort.c.o"
