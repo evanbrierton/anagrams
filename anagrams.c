@@ -46,14 +46,16 @@ size_t partitionString(char str[], size_t left, size_t right)
   return i;
 }
 
-void sortString(char str[], size_t left, size_t right)
+char * sortString(char str[], size_t left, size_t right)
 {
+  char * clone = cloneString(str);
   if (left < right && right < LINE_LENGTH)
   {
-    size_t p = partitionString(str, left, right);
-    sortString(str, left, p - 1);
-    sortString(str, p + 1, right);
+    size_t p = partitionString(clone, left, right);
+    sortString(clone, left, p - 1);
+    sortString(clone, p + 1, right);
   }
+  return clone;
 }
 
 void processStrings(char target[N_LINES][LINE_LENGTH], char strings[N_LINES][LINE_LENGTH])
@@ -61,7 +63,7 @@ void processStrings(char target[N_LINES][LINE_LENGTH], char strings[N_LINES][LIN
   for (size_t i = 0; i < N_LINES; i++)
   {
     char * clone = toLowerCase(cleanString(strings[i]));
-    sortString(clone, 0, strlen(clone) - 1);
+    clone = sortString(clone, 0, strlen(clone) - 1);
     strcpy(target[i], clone);
   }
 }
@@ -71,8 +73,6 @@ bool isAnagram(char processedStr1[], char processedStr2[])
   return strcmp(processedStr1, processedStr2) == 0;
 }
 
-// bool wouldBeAnagram(char )
-
 bool includes(size_t arr[], size_t length, size_t n)
 {
   for (size_t i = 0; i < length; i++) if (arr[i] == n) return true;
@@ -81,15 +81,11 @@ bool includes(size_t arr[], size_t length, size_t n)
 
 size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES])
 {
-  char processedStrings[N_LINES][LINE_LENGTH];
-  processStrings(processedStrings, strings);
-
+  char processStringsArr[N_LINES][LINE_LENGTH];
+  processStrings(processStringsArr, strings);
   size_t ignoreIndices[N_LINES];
   size_t ignoreIndicesLength = 0;
   size_t anagramsLength = 0;
-
-  for (size_t i = 0; i < N_LINES; i++) printf("%s\n", processedStrings[i]);
-  
   
   for (size_t i = 0; i < N_LINES; i++)
   {
@@ -100,7 +96,7 @@ size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][
     size_t matchesLength = 1;
 
     for (size_t j = i + 1; j < N_LINES; j++)
-      if (isAnagram(processedStrings[i], processedStrings[j]))
+      if (isAnagram(strings[i], strings[j]))
       {
         strcpy(matches[matchesLength++], strings[j]);
         ignoreIndices[ignoreIndicesLength++] = j;
