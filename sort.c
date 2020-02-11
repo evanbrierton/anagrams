@@ -1,16 +1,10 @@
 #include <string.h>
-#include <stdlib.h>
 #include "config.h"
-
-char * newString(size_t length)
-{
-  char * str = (char*)malloc(length + 1);
-  return str;
-}
+#include "utils.h"
 
 void swap(char str1[], char str2[])
 {
-    char temp1[LINE_LENGTH] = {0}, temp2[LINE_LENGTH] = {0};
+    char temp1[LINE_LENGTH], temp2[LINE_LENGTH];
 
     strcpy(temp1, str1);
     strcpy(temp2, str2);
@@ -18,27 +12,12 @@ void swap(char str1[], char str2[])
     strcpy(str2, temp1);
 }
 
-char * cloneString(char str[])
-{
-  char * clone = (char*)malloc(strlen(str) + 1);
-  strcpy(clone, str);
-  return clone;
-}
-
-char * toLowerCase(char str[])
-{ 
-  char * lowerCaseStr = newString(strlen(str));
-  for (size_t i = 0; i < strlen(str); i++)
-    lowerCaseStr[i] = ('A' <= str[i] && str[i] <= 'Z') ? str[i] + 'a' - 'A' : str[i];
-  return lowerCaseStr;
-}
-
 int compare(char str1[], char str2[])
 {
   /* Assignment of lowercase strings to variables so that memory allocated by malloc is released
   when the scope is exited */
   char * lowerCaseStr1 = toLowerCase(str1), * lowerCaseStr2 = toLowerCase(str2);
-  return strcmp(lowerCaseStr1, lowerCaseStr2);
+  return strcmp(lowerCaseStr1, lowerCaseStr2) < 0;
 }
 
 size_t partition(char strings[N_LINES][LINE_LENGTH], size_t left, size_t right)
@@ -47,7 +26,7 @@ size_t partition(char strings[N_LINES][LINE_LENGTH], size_t left, size_t right)
   size_t i = left;
 
   for (size_t j = left; j < right; j++)
-    if (compare(strings[j], pivot) < 0) swap(strings[i++], strings[j]);
+    if (compare(strings[j], pivot)) swap(strings[i++], strings[j]);
     
     swap(strings[i], strings[right]);
       

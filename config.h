@@ -1,7 +1,12 @@
+#include <stdio.h>
+
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define N_LINES 14
-#define LINE_LENGTH 128
+size_t getNLines(const char file[]);
+size_t getLongestLineLength(const char file[]);
+
+#define N_LINES getNLines("input.txt")
+#define LINE_LENGTH getLongestLineLength("input.txt")
 
 #endif

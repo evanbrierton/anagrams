@@ -2,7 +2,7 @@
 #include <string.h>
 #include "config.h"
 
-void getInput(const char input[], char target[N_LINES][LINE_LENGTH])
+void getInput(const char input[], char target[][LINE_LENGTH])
 {
     FILE *fp;
 
@@ -14,6 +14,7 @@ void getInput(const char input[], char target[N_LINES][LINE_LENGTH])
 void clearFile(const char file[])
 {
     FILE *fp;
+
     fp = fopen(file, "w");
     fclose(fp);
 }
@@ -21,6 +22,7 @@ void clearFile(const char file[])
 void appendToOutput(const char output[], const char string[])
 {
     FILE *fp;
+
     fp = fopen(output, "a");
     fprintf(fp, "%s\n", string);
     fclose(fp);

@@ -1,110 +1,74 @@
-#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include "config.h"
+#include "utils.h"
 #include "sort.h"
 
-char * cleanString(char str[])
-{
-  char * clone = newString(strlen(str));
-  size_t currentLength = 0;
-  bool matched = false;
-  char charactersToRemove[] = "!’?;:,. ";
-  for (size_t i = 0; i < strlen(str); i++)
-  {
-    for (size_t j = 0; j < strlen(charactersToRemove); j++)
-      if (str[i] == charactersToRemove[j]) matched = true;
-
-    if (matched == false) clone[currentLength++] = str[i];
-    matched = false;
-  }
-  return clone;
-}
-
-void swapStrings(char * a, char * b)
-{
-    char temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int compareStrings(char a, char b)
-{
-  return a - b;
-}
-
-size_t partitionString(char str[], size_t left, size_t right)
-{
-  char pivot = str[right];
-  size_t i = left;
-
-  for (size_t j = left; j < right; j++)
-    if (compareStrings(str[j], pivot) < 0) swapStrings(&str[i++], &str[j]);
-      swapStrings(&str[i], &str[right]);
-      
-  return i;
-}
-
-char * sortString(char str[], size_t left, size_t right)
-{
-  char * clone = cloneString(str);
-  if (left < right && right < LINE_LENGTH)
-  {
-    size_t p = partitionString(clone, left, right);
-    sortString(clone, left, p - 1);
-    sortString(clone, p + 1, right);
-  }
-  return clone;
+int min(int a, int b) {
+  return (a < b) ? a : b;
 }
 
 void processStrings(char target[N_LINES][LINE_LENGTH], char strings[N_LINES][LINE_LENGTH])
 {
   for (size_t i = 0; i < N_LINES; i++)
   {
-    char * clone = toLowerCase(cleanString(strings[i]));
-    clone = sortString(clone, 0, strlen(clone) - 1);
+    char * clone = cleanString(strings[i]);
+    sortString(clone, 0, strlen(clone) - 1);
     strcpy(target[i], clone);
   }
 }
 
-bool isAnagram(char processedStr1[], char processedStr2[])
+bool isAnagram(char str1[], char str2[])
 {
-  return strcmp(processedStr1, processedStr2) == 0;
+  char * clone1 = cleanString(str1);
+  char * clone2 = cleanString(str2);
+  if (strlen(clone1) != strlen(clone2)) return false;
+  sortString(clone1, 0, strlen(clone1) - 1);
+  sortString(clone2, 0, strlen(clone2) - 1);
+  return strcmp(clone1, clone2) == 0;
 }
 
-bool includes(size_t arr[], size_t length, size_t n)
+bool wouldBeAnagram(char str1[], char str2[])
 {
-  for (size_t i = 0; i < length; i++) if (arr[i] == n) return true;
-  return false;  
+  char * clone1 = cleanString(str1);
+  char * clone2 = cleanString(str2);
+  if  (strlen(clone1) == strlen(clone2)) return false;
+  int length = min(strlen(clone1), strlen(clone2));
+  clone1[length] = '\0';
+  clone2[length] = '\0';
+  sortString(clone1, 0, strlen(clone1) - 1);
+  sortString(clone2, 0, strlen(clone2) - 1);
+  return strcmp(clone1, clone2) == 0;
 }
 
-size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES])
+size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES], bool (*compare)(char *, char *))
 {
-  char processStringsArr[N_LINES][LINE_LENGTH];
-  processStrings(processStringsArr, strings);
+  // char processedStrings[N_LINES][LINE_LENGTH];
+  // processStrings(processedStrings, strings);
+
   size_t ignoreIndices[N_LINES];
-  size_t ignoreIndicesLength = 0;
   size_t anagramsLength = 0;
+
+  // for (size_t i = 0; i < N_LINES; i++) printf("%s\n", processedStrings[i]);
   
   for (size_t i = 0; i < N_LINES; i++)
   {
-    if (includes(ignoreIndices, ignoreIndicesLength, i)) continue;
+    if (ignoreIndices[i] && compare == isAnagram) continue;
 
-    char matches[N_LINES][LINE_LENGTH] = {{0}};
+    char matches[N_LINES][LINE_LENGTH];
     strcpy(matches[0], strings[i]);
     size_t matchesLength = 1;
 
     for (size_t j = i + 1; j < N_LINES; j++)
-      if (isAnagram(strings[i], strings[j]))
+      if (compare(strings[i], strings[j]))
       {
         strcpy(matches[matchesLength++], strings[j]);
-        ignoreIndices[ignoreIndicesLength++] = j;
+        ignoreIndices[j] = true;
       }
     if (matchesLength > 1)
     {
-      char matchString[(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES] = {0};
-      snprintf(matchString, sizeof matchString, "Anagram %zu:", anagramsLength + 1);
+      char matchString[(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES];
+      // snprintf(matchString, sizeof matchString, "Anagram %zu:", anagramsLength + 1);
       for (size_t j = 0; j < matchesLength; j++)
       {
         strcat(matchString, " \"");

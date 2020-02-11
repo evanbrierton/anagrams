@@ -14,3 +14,11 @@ tac
 Tom Marvolo Riddle
 UCD
 
+ "Act" "cat" "tac"
+ "I am Lord Voldemort" "Tom Marvolo Riddle"
+ "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!"
+
+ "cuddle" "UCD"
+ "duck" "UCD"
+ "I am Lord Voldemort" "Old Immortal dovers"
+ "Old Immortal dovers" "Tom Marvolo Riddle"
