@@ -7,16 +7,6 @@ int min(int a, int b) {
   return (a < b) ? a : b;
 }
 
-void processStrings(char ** target, char ** strings, size_t nLines)
-{
-  for (size_t i = 0; i < nLines; i++)
-  {
-    char * clone = cleanString(strings[i]);
-    sortString(clone, 0, strlen(clone) - 1);
-    strcpy(target[i], clone);
-  }
-}
-
 bool isAnagram(char str1[], char str2[])
 {
   char * clone1 = cleanString(str1);
@@ -42,8 +32,6 @@ bool wouldBeAnagram(char str1[], char str2[])
 
 size_t getAnagrams(char ** strings, char ** target, bool (*compare)(char *, char *), size_t nLines, size_t longestLineLength)
 {
-  // char processedStrings[nLines][longestLineLength];
-  // processStrings(processedStrings, strings);
 
   size_t * ignoreIndices = calloc(nLines, sizeof(size_t));
   
