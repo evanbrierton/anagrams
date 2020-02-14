@@ -1,11 +1,10 @@
 #include <string.h>
 #include <stdbool.h>
-#include "config.h"
 #include "utils.h"
 
-void swap(char str1[], char str2[])
+void swap(char * str1, char * str2)
 {
-    char temp1[LINE_LENGTH], temp2[LINE_LENGTH];
+    char temp1[strlen(str1) + 1], temp2[strlen(str2) + 1];
 
     strcpy(temp1, str1);
     strcpy(temp2, str2);
@@ -13,7 +12,7 @@ void swap(char str1[], char str2[])
     strcpy(str2, temp1);
 }
 
-bool compare(char str1[], char str2[])
+bool compare(char * str1, char * str2)
 {
   /* Assignment of lowercase strings to variables so that memory allocated by malloc is released
   when the scope is exited */
@@ -21,7 +20,7 @@ bool compare(char str1[], char str2[])
   return strcmp(lowerCaseStr1, lowerCaseStr2) < 0;
 }
 
-size_t partition(char strings[N_LINES][LINE_LENGTH], size_t left, size_t right)
+size_t partition(char ** strings, size_t left, size_t right)
 {
   char * pivot = strings[right];
   size_t i = left;
@@ -34,9 +33,9 @@ size_t partition(char strings[N_LINES][LINE_LENGTH], size_t left, size_t right)
   return i;
 }
 
-void sort(char strings[N_LINES][LINE_LENGTH], size_t left, size_t right)
+void sort(char ** strings, int left, int right)
 {
-  if (left < right && right < N_LINES)
+  if (left < right && right > 0)
   {
     size_t p = partition(strings, left, right);
     sort(strings, left, p - 1);

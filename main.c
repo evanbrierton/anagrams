@@ -1,37 +1,44 @@
-#include "config.h"
+#include <math.h>
+#include <stdlib.h>
 #include "io.h"
 #include "sort.h"
 #include "anagrams.h"
-#include "utils.h"
-#include <string.h>
 
 int main(void)
 {
     clearFile("output.txt");
 
-    char data[N_LINES][LINE_LENGTH];
-    getInput("input.txt", data);
-    sort(data, 0, N_LINES - 1);
-    for (size_t i = 0; i < N_LINES; i++) printf("%zu: %s\n", i, data[i]);
+    const size_t nLines = getNLines("input.txt");
+    const size_t longestLineLength = getlongestLineLengthLength("input.txt");
+    const size_t maxNAnagrams = nLines / 2;
+    const size_t maxAnagramLength = (longestLineLength + 3) * nLines + 10 + floor(log10(nLines) + 1);
+
+    char ** data = malloc(nLines * sizeof(char*));
+    for (size_t i = 0; i < nLines; i++) data[i] = malloc(longestLineLength * sizeof(char));
+    getInput("input.txt", data, longestLineLength);
+    sort(data, 0, nLines - 1);
     
     appendToOutput("output.txt", "The sorted list of words follows:");
-    appendListToOutput("output.txt", N_LINES, LINE_LENGTH, data);
+    appendListToOutput("output.txt", nLines, data);
     appendToOutput("output.txt", "");
     
-    char anagrams[MAX_N_ANAGRAMS][MAX_ANAGRAM_LENGTH];
+    char ** anagrams = malloc(maxNAnagrams * sizeof(char*));
+    for (size_t i = 0; i < nLines; i++) anagrams[i] = malloc(maxAnagramLength * sizeof(char));
     size_t nAnagrams = getAnagrams(data, anagrams, isAnagram);
 
-    formatAnagrams(anagrams, nAnagrams);
+    formatAnagrams(anagrams, nAnagrams, maxAnagramLength);
     
-    appendListToOutput("output.txt", nAnagrams, MAX_ANAGRAM_LENGTH, anagrams);
+    appendListToOutput("output.txt", nAnagrams, anagrams);
     appendToOutput("output.txt", "");
 
-    char wouldBeAnagrams[MAX_N_ANAGRAMS][MAX_ANAGRAM_LENGTH];
+    char ** wouldBeAnagrams = malloc(maxNAnagrams * sizeof(char*));
+    for (size_t i = 0; i < nLines; i++) wouldBeAnagrams[i] = malloc(maxAnagramLength * sizeof(char));
     size_t nWouldBeAnagrams = getAnagrams(data, wouldBeAnagrams, wouldBeAnagram);
 
-    formatWouldBeAnagrams(wouldBeAnagrams, nWouldBeAnagrams);
+    formatWouldBeAnagrams(wouldBeAnagrams, nWouldBeAnagrams, maxAnagramLength);
 
-    appendListToOutput("output.txt", nWouldBeAnagrams, MAX_ANAGRAM_LENGTH, wouldBeAnagrams);
+    appendToOutput("output.txt", "Missing anagrams:");
+    appendListToOutput("output.txt", nWouldBeAnagrams, wouldBeAnagrams);
     
     return 0;
 }

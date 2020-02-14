@@ -1,8 +1,6 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
 #include <stdlib.h>
-#include "config.h"
+#include <string.h>
+#include <stdbool.h>
 
 char * newString(size_t length)
 {
@@ -94,7 +92,7 @@ size_t partitionString(char str[], size_t left, size_t right)
 
 void sortString(char str[], size_t left, size_t right)
 {
-  if (left < right && right < LINE_LENGTH)
+  if (left < right && right < strlen(str))
   {
     size_t p = partitionString(str, left, right);
     sortString(str, left, p - 1);
