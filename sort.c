@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdbool.h>
 #include "config.h"
 #include "utils.h"
 
@@ -12,7 +13,7 @@ void swap(char str1[], char str2[])
     strcpy(str2, temp1);
 }
 
-int compare(char str1[], char str2[])
+bool compare(char str1[], char str2[])
 {
   /* Assignment of lowercase strings to variables so that memory allocated by malloc is released
   when the scope is exited */

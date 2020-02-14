@@ -3,7 +3,7 @@ Act
 cat
 Computer science
 cuddle
-duck
+ducks
 Hey there!
 I am Lord Voldemort
 Leonardo da Vinci! The Mona Lisa!
@@ -14,11 +14,11 @@ tac
 Tom Marvolo Riddle
 UCD
 
- "Act" "cat" "tac"
- "I am Lord Voldemort" "Tom Marvolo Riddle"
- "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!"
+Anagram 1: "Act" "cat" "tac" 
+Anagram 2: "I am Lord Voldemort" "Tom Marvolo Riddle" 
+Anagram 3: "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!" 
 
- "cuddle" "UCD"
- "duck" "UCD"
- "I am Lord Voldemort" "Old Immortal dovers"
- "Old Immortal dovers" "Tom Marvolo Riddle"
+"cuddle" is an anagram of "UCD" if 3 characters are removed
+"ducks" is an anagram of "UCD" if 2 characters are removed
+"Old Immortal dovers" is an anagram of "I am Lord Voldemort" if 1 character is removed
+"Old Immortal dovers" is an anagram of "Tom Marvolo Riddle" if 1 character is removed

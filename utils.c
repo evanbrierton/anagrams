@@ -16,6 +16,14 @@ char * cloneString(char str[])
   return strcpy(clone, str);
 }
 
+char * slice(char str[], size_t a, size_t b)
+{
+  char * slicedString = newString(b - a);
+  for (size_t i = 0; i < b - a; i++) slicedString[i] = str[i + a];
+  slicedString[b - a] = '\0';
+  return slicedString;
+}
+
 char * toLowerCase(char str[])
 { 
   char * lowerCaseStr = newString(strlen(str));
@@ -39,6 +47,20 @@ char * removeCharacters(char str[], const char charactersToRemove[])
   }
   
   return clone;
+}
+
+char * getShortestString(char str1[], char str2[], const char charactersToIgnore[])
+{
+  char * cleanStr1 = removeCharacters(str1, charactersToIgnore);
+  char * cleanStr2 = removeCharacters(str2, charactersToIgnore);
+  return strlen(cleanStr1) < strlen(cleanStr2) ? str1 : str2;
+}
+
+char * getLongestString(char str1[], char str2[], const char charactersToIgnore[])
+{
+  char * cleanStr1 = removeCharacters(str1, charactersToIgnore);
+  char * cleanStr2 = removeCharacters(str2, charactersToIgnore);
+  return strlen(cleanStr1) > strlen(cleanStr2) ? str1 : str2;
 }
 
 char * cleanString(char str[])

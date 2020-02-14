@@ -41,12 +41,12 @@ bool wouldBeAnagram(char str1[], char str2[])
   return strcmp(clone1, clone2) == 0;
 }
 
-size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES], bool (*compare)(char *, char *))
+size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][MAX_ANAGRAM_LENGTH], bool (*compare)(char *, char *))
 {
-  // char processedStrings[N_LINES][LINE_LENGTH];
-  // processStrings(processedStrings, strings);
+  char processedStrings[N_LINES][LINE_LENGTH];
+  processStrings(processedStrings, strings);
 
-  size_t ignoreIndices[N_LINES];
+  size_t ignoreIndices[N_LINES] = {false};
   size_t anagramsLength = 0;
 
   // for (size_t i = 0; i < N_LINES; i++) printf("%s\n", processedStrings[i]);
@@ -55,7 +55,7 @@ size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][
   {
     if (ignoreIndices[i] && compare == isAnagram) continue;
 
-    char matches[N_LINES][LINE_LENGTH];
+    char matches[N_LINES][LINE_LENGTH] = {{0}};
     strcpy(matches[0], strings[i]);
     size_t matchesLength = 1;
 
@@ -67,13 +67,13 @@ size_t getAnagrams(char strings[N_LINES][LINE_LENGTH], char target[N_LINES / 2][
       }
     if (matchesLength > 1)
     {
-      char matchString[(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES];
+      char matchString[(LINE_LENGTH + 12 + N_LINES / 10) * N_LINES] = {0};
       // snprintf(matchString, sizeof matchString, "Anagram %zu:", anagramsLength + 1);
       for (size_t j = 0; j < matchesLength; j++)
       {
-        strcat(matchString, " \"");
-        strcat(matchString, matches[j]);
         strcat(matchString, "\"");
+        strcat(matchString, matches[j]);
+        strcat(matchString, "\" ");
       }
 
       strcpy(target[anagramsLength++], matchString);
