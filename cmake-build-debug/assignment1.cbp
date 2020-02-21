@@ -78,6 +78,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/anagrams.c">
+			<Option target="assignment1"/>
+		</Unit>
+		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/anagrams.h">
+			<Option target="assignment1"/>
+		</Unit>
 		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/io.c">
 			<Option target="assignment1"/>
 		</Unit>
@@ -93,7 +99,16 @@
 		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.h">
 			<Option target="assignment1"/>
 		</Unit>
+		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/utils.c">
+			<Option target="assignment1"/>
+		</Unit>
+		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/utils.h">
+			<Option target="assignment1"/>
+		</Unit>
 		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/input.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

@@ -96,11 +96,39 @@ CMakeFiles/assignment1.dir/sort.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/sort.c.s"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/sort.c" -o CMakeFiles/assignment1.dir/sort.c.s
 
+CMakeFiles/assignment1.dir/anagrams.c.o: CMakeFiles/assignment1.dir/flags.make
+CMakeFiles/assignment1.dir/anagrams.c.o: ../anagrams.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/assignment1.dir/anagrams.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/anagrams.c.o   -c "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/anagrams.c"
+
+CMakeFiles/assignment1.dir/anagrams.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/anagrams.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/anagrams.c" > CMakeFiles/assignment1.dir/anagrams.c.i
+
+CMakeFiles/assignment1.dir/anagrams.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/anagrams.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/anagrams.c" -o CMakeFiles/assignment1.dir/anagrams.c.s
+
+CMakeFiles/assignment1.dir/utils.c.o: CMakeFiles/assignment1.dir/flags.make
+CMakeFiles/assignment1.dir/utils.c.o: ../utils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/assignment1.dir/utils.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/assignment1.dir/utils.c.o   -c "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/utils.c"
+
+CMakeFiles/assignment1.dir/utils.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/assignment1.dir/utils.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/utils.c" > CMakeFiles/assignment1.dir/utils.c.i
+
+CMakeFiles/assignment1.dir/utils.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/assignment1.dir/utils.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/utils.c" -o CMakeFiles/assignment1.dir/utils.c.s
+
 # Object files for target assignment1
 assignment1_OBJECTS = \
 "CMakeFiles/assignment1.dir/main.c.o" \
 "CMakeFiles/assignment1.dir/io.c.o" \
-"CMakeFiles/assignment1.dir/sort.c.o"
+"CMakeFiles/assignment1.dir/sort.c.o" \
+"CMakeFiles/assignment1.dir/anagrams.c.o" \
+"CMakeFiles/assignment1.dir/utils.c.o"
 
 # External object files for target assignment1
 assignment1_EXTERNAL_OBJECTS =
@@ -108,9 +136,11 @@ assignment1_EXTERNAL_OBJECTS =
 assignment1: CMakeFiles/assignment1.dir/main.c.o
 assignment1: CMakeFiles/assignment1.dir/io.c.o
 assignment1: CMakeFiles/assignment1.dir/sort.c.o
+assignment1: CMakeFiles/assignment1.dir/anagrams.c.o
+assignment1: CMakeFiles/assignment1.dir/utils.c.o
 assignment1: CMakeFiles/assignment1.dir/build.make
 assignment1: CMakeFiles/assignment1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable assignment1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable assignment1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/assignment1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

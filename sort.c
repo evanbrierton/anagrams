@@ -27,9 +27,9 @@ size_t partition(char ** strings, size_t left, size_t right)
 
   for (size_t j = left; j < right; j++)
     if (compare(strings[j], pivot)) swap(strings[i++], strings[j]);
-    
-    swap(strings[i], strings[right]);
-      
+
+  swap(strings[i], strings[right]);
+
   return i;
 }
 
@@ -37,8 +37,8 @@ void sort(char ** strings, int left, int right)
 {
   if (left < right && right > 0)
   {
-    size_t p = partition(strings, left, right);
-    sort(strings, left, p - 1);
-    sort(strings, p + 1, right);
+    size_t pivotIndex = partition(strings, left, right);
+    sort(strings, left, (size_t)(pivotIndex - 1));
+    sort(strings, (size_t)(pivotIndex + 1), right);
   }
 }

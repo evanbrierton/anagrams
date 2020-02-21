@@ -32,6 +32,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../CMakeLists.txt"
   "CMakeFiles/3.15.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.15.3/CMakeSystem.cmake"
+  "../input.txt"
   )
 
 # The corresponding makefile is:
@@ -42,6 +43,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "input.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
