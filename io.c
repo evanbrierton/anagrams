@@ -1,114 +1,103 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <errno.h>
 #include "utils.h"
 
-// Function to read input from a text file and output each line to a string array
-void getInput(const char * input, char ** target, size_t lineLength)
-{
-    FILE * fp = fopen(input, "r");
+// Function to clear all text from a file
+void clearFile(const char * file) {   
+    /* Initialise fp to a pointer to the file to be wiped, opening with the "w" flag also clears
+    the file */
+    FILE * fp = fopen(file, "w");
+    // Check if file has been found and cleared successfully
     error(!fp, strerror(errno));
 
-    for (size_t i = 0; fgets(target[i], lineLength, fp); i++) target[i][strlen(target[i]) - 1] = '\0';
+    // Close file
     fclose(fp);
 }
 
-void clearFile(const char * file)
-{
-    FILE *fp;
-    fp = fopen(file, "w");
+// Function to calculate the number of lines in an input file
+size_t getNLines(const char * file) {
+    // Initialise variable to track the number of lines in the file
+    size_t lines = 0;
+
+    // Initialise fp to the input file in read mode
+    FILE * fp = fopen(file, "r");
+    // Check if the file has been found
     error(!fp, strerror(errno));
 
-    fclose(fp);
-}
-
-void appendToOutput(const char * output, const char * string)
-{
-    FILE *fp;
-    fp = fopen(output, "a");
-    error(!fp, strerror(errno));
-
-    fprintf(fp, "%s\n", string);
-    fclose(fp);
-}
-
-void appendListToOutput(const char * output, size_t lines, char ** strings)
-{
-    for (size_t i = 0; i < lines; i++) appendToOutput(output, strings[i]);
-}
-
-size_t getNLines(const char * file)
-{
-    size_t lines = 1;
-
-    FILE *fp;
-    fp = fopen(file, "r");
-    error(!fp, strerror(errno));
-
+    // Initialise variable to track the last character in the file aside from EOF
     char lastCharacter = 0;
-    for (int c = getc(fp); c != EOF; c = getc(fp))
-    {
+    // Iterate over each character in the file
+    for (int c = getc(fp); c != EOF; c = getc(fp)) {
         lastCharacter = (char)c;
+        // Increment lines if a newline character is encountered
         if (c == '\n') lines++;
     }
-    error(lastCharacter != '\n', "Last character must be a newline");
+    // Check if last character is a newline
+    error(lastCharacter != '\n', "Last character must be a newline");\
+
+    // Close the file
     fclose(fp);
-    return lines - 1;
+    return lines;
 }
 
-size_t getlongestLineLengthLength(const char * file)
-{
-    size_t length = 0;
-    size_t max = 0;
+// Function to return the length of the longest line in the input file
+size_t getLongestLineLengthLength(const char * file) {   
+    /* Initialise variables to track the length of the current line being read and the maximum
+    length read so far; */
+    size_t length = 0, max = 0;
     
-    FILE *fp;
-    fp = fopen(file, "r");
+    // Initialise fp to a pointer to the file in read mode
+    FILE * fp = fopen(file, "r");
+    // Check that the file has been found
     error(!fp, strerror(errno));
 
-    for (int c = getc(fp); c != EOF; c = getc(fp))
-    {
+    // Iterate over each character in the file
+    for (int c = getc(fp); c != EOF; c = getc(fp)) {   
+        // Increment length for each character in the line
         length++;
-        if (c == '\n')
-        {  
+        if (c == '\n') {  
+            // At a newline set the max to the current length if it is the longest found
             if (length > max) max = length;
+            // Reset the current line length to 0
             length = 0;
         }
     };
-    return max + 2;
+    // Return max + 1 to account for the inclusion of the null terminator
+    return max + 1;
 }
 
-void formatAnagrams(char ** target, size_t nAnagrams, size_t maxAnagramLength)
-{
-    for (size_t i = 0; i < nAnagrams; i++) {
-        char * formattedString = newString(maxAnagramLength);
-        snprintf(formattedString, maxAnagramLength, "Anagram %zu: %s", i + 1, target[i]);
-        strcpy(target[i], formattedString);
-    }
+// Function to read input from a text file and output each line to a string array
+void getInput(const char * input, char ** target, size_t lineLength) {
+    // Initialise fp to a pointer to the input file
+    FILE * fp = fopen(input, "r");
+    // Check if  file has been found
+    error(!fp, strerror(errno));
+
+    /* For each line in the input feed the line into its corresponding index in the target string
+    array and replace the newline character with the null terminator */
+    for (size_t i = 0; fgets(target[i], lineLength, fp); i++) target[i][strlen(target[i]) - 1] = '\0';
+
+    // Close file
+    fclose(fp);
 }
 
-size_t formatter(char * root, char * remainder, char ** target, size_t maxLength, size_t currentLength)
-{   
-    int index = find(remainder, "\" ");
-    size_t difference = getStringDiff(remainder, root);
-    if(index == -1)
-    {
-        snprintf(target[currentLength++], maxLength, "%s is an anagram of %s if %zu character%s removed", remainder, root, difference, difference == 1 ? " is" : "s are");
-        return currentLength;
-    }
-    formatter(root, slice(remainder, 0, index), target, maxLength, currentLength);
-    return formatter(root, slice(remainder, index + 1, strlen(remainder)), target, maxLength, currentLength + 1);
+// Function to append a line of text to the output file
+void appendToOutput(const char * output, const char * string) {
+    // Initialise fp to a pointer to the output file in append mode
+    FILE * fp = fopen(output, "a");
+    // Check if file has been found
+    error(!fp, strerror(errno));
+
+    // Append line of text to the input file
+    fprintf(fp, "%s\n", string);
+
+    // Close file
+    fclose(fp);
 }
 
-size_t formatWouldBeAnagrams(char ** target, size_t nAnagrams, size_t maxAnagramLength)
-{
-    size_t length = 0;
-    for (size_t i = 0; i < nAnagrams; i++)
-    {
-        int spaceIndex = find(target[i], "\" ");
-        char * root = slice(target[i], 0, spaceIndex);
-        char * remainder = slice(target[i], spaceIndex + 1, strlen(target[i]));
-        length = formatter(root, remainder, target, maxAnagramLength, length);
-    }
-    return length;
+// Function to append an array of strings to the output file
+void appendListToOutput(const char * output, size_t lines, char ** strings) {
+    // For each string in the array call appendToOutput on the string
+    for (size_t i = 0; i < lines; i++) appendToOutput(output, strings[i]);
 }

@@ -5,52 +5,95 @@
 #include "io.h"
 
 // Error handler
-void error(bool condition, const char * message)
-{
-  if (condition)
-  {
+void error(bool condition, const char * message) {
+  if (condition) {
     appendToOutput("output.txt", message);    // Print error message to output file
     fprintf(stderr, "Error: %s\n", message);  // Print error message to stderr
     exit(EXIT_FAILURE); // Terminate execution
   }
 }
 
-// Function to allocate memory to a new string based on an input length and return the string
-char * newString(size_t length)
-{
+// Function to allocate memory for a new string based on an input length and return the string
+char * newString(size_t length) {
   // Add 1 to the length to account for the null terminator and cast to char*
   char * str = (char*)malloc((length + 1) * sizeof(char));
   return str;
 }
 
-char ** newStringArray(size_t arrayLength, size_t stringLength)
-{
+// Function to allocate memory for a new string array
+char ** newStringArray(size_t arrayLength, size_t stringLength) {
+  // Allocate memory to the array itself
   char ** array = malloc(arrayLength * sizeof(char*));
+  // Allocate enough memory for each string in the array
   for (size_t i = 0; i < arrayLength; i++) array[i] = newString(stringLength);
   return array;
 }
 
-int find(char * str, const char * substr)
-{
-    for (size_t i = 0; i < strlen(str); i++)
-    {
-        bool match = true;
-        for (size_t j = 0; j < strlen(substr); j++)
-        {
-           if (str[i + j] != substr[j])
-           {
-               match = false;
-               break;
-           }
-        }
-        if (match == true) return i + strlen(substr) - 1;
+// Function to remove certain characters from a string
+char * removeCharacters(char str[], char charactersToRemove[]) {
+  // Initialise an array to store boolean values for every possible ASCII character
+  bool characters[256] = {false};
+  // Set the corresponding boolean character of the value to true if it is to be removed
+  for (size_t i = 0; i < strlen(charactersToRemove); i++) characters[(size_t)charactersToRemove[i]] = true;
+
+  // Initialise a new string so that the function is non-mutative
+  char * cleanedString = newString(strlen(str));
+  
+  // Set the current length of the new string string to 0
+  size_t currentLength = 0;
+
+  // Iterate over the string and if the character is not to be removed, append it to the new string
+  for (size_t i = 0; i < strlen(str); i++) {
+    if (!characters[(size_t)str[i]]) cleanedString[currentLength++] = str[i];
+  }
+
+  return cleanedString;
+}
+
+// Function to remove non-alphabetical characters from a string
+char * cleanString(char * str) {
+  return removeCharacters(str, "   !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
+}
+
+// Function to convert a string to lower case
+char * toLowerCase(char * str) { 
+  // Initialise a new string of the same length so that the function is non-mutative
+  char * lowerCasedString = newString(strlen(str));
+  // Replace all capital characters with their corresponding lowercase characters
+  for (size_t i = 0; i < strlen(str); i++) {
+    lowerCasedString[i] = (char)(('A' <= str[i] && str[i] <= 'Z') ? str[i] + ('a' - 'A') : str[i]);
+  }
+
+  return lowerCasedString;
+}
+
+// Shorthand function for convenience and maintainability
+
+/* Function to find a substring within an input string and return the index of the last character
+of the occurrence */
+int find(char * str, const char * substr) {   
+  // Iterate over the input string
+  for (size_t i = 0; i < strlen(str); i++) {
+    // Assume a match will be found
+    bool match = true;
+    // Iterate over each character in the substring
+    for (size_t j = 0; j < strlen(substr); j++) {
+      /* If any part of the substring does not match this section of the string break to continue
+      to the next character in the primary string */
+      if (str[i + j] != substr[j]) {
+        match = false;
+        break;
+      }
     }
-    return -1;
+    // Return the index, adding strlen(substr) - 1 so it is the last character of the occurrence
+    if (match == true) return (size_t)(i + strlen(substr) - 1);
+  }
+  // Return -1 if no match is found
+  return -1;
 }
 
 // Function to slice out a section of a string and return the slice
-char * slice(const char * str, size_t a, size_t b)
-{
+char * slice(const char * str, size_t a, size_t b) {
   // Initialise a new string of the length of the slice
   char * slicedString = newString(b - a);
   // Set each character in the sliced string
@@ -60,92 +103,8 @@ char * slice(const char * str, size_t a, size_t b)
   return slicedString;
 }
 
-// Function to convert a clone of a string to lower case and return that clone
-char * toLowerCase(char str[])
-{ 
-  // Initialise a new string of the same length
-  char * lowerCaseStr = newString(strlen(str));
-  // Replace all capital characters with their corresponding lowercase characters
-  for (size_t i = 0; i < strlen(str); i++)
-    lowerCaseStr[i] = (char)(('A' <= str[i] && str[i] <= 'Z') ? str[i] + ('a' - 'A') : str[i]);
-
-  return lowerCaseStr;
-}
-
-char * removeCharacters(char str[], const char charactersToRemove[])
-{
-  char * clone = newString(strlen(str));
-  size_t currentLength = 0;
-  bool matched = false;
-  for (size_t i = 0; i < strlen(str); i++)
-  {
-    for (size_t j = 0; j < strlen(charactersToRemove); j++)
-      if (str[i] == charactersToRemove[j]) matched = true;
-
-    if (matched == false) clone[currentLength++] = str[i];
-    matched = false;
-  }
-  
-  return clone;
-}
-
-// char * removeCharacters(char str[], const char charactersToRemove[])
-// {
-//   bool characters[256];
-//   for (size_t i = 0; i < strlen(charactersToRemove); i++) characters[(size_t)charactersToRemove[i]] = true;
-
-//   char * clone = newString(strlen(str));
-
-//   size_t currentLength = 0;
-
-//   for (size_t i = 0; i < strlen(str); i++)
-//   {
-//     if (!characters[(size_t)str[i]]) clone[currentLength++] = str[i];
-//   }
-//   return clone;
-// }
-
-char * cleanString(char str[])
-{
-  return toLowerCase(removeCharacters(str, "!’?;:,. "));
-}
-
-size_t getStringDiff(char * str1, char * str2)
-{
+/* A function to return the difference in length between two strings, ignoring certain characters
+defined in the cleanString function */
+size_t getStringDiff(char * str1, char * str2) {
   return abs((int)strlen(cleanString(str1)) - (int)strlen(cleanString(str2)));
-}
-
-
-void swapChars(char * a, char * b)
-{
-    char temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int compareChars(char a, char b)
-{
-  return a - b;
-}
-
-size_t partitionString(char str[], size_t left, size_t right)
-{
-  char pivot = str[right];
-  size_t i = left;
-
-  for (size_t j = left; j < right; j++)
-    if (compareChars(str[j], pivot) < 0) swapChars(&str[i++], &str[j]);
-      swapChars(&str[i], &str[right]);
-      
-  return i;
-}
-
-void sortString(char str[], size_t left, size_t right)
-{
-  if (left < right && right < strlen(str))
-  {
-    size_t p = partitionString(str, left, right);
-    sortString(str, left, p - 1);
-    sortString(str, p + 1, right);
-  }
 }

@@ -9,6 +9,7 @@
     "stdlib.h": "c",
     "utils.h": "c",
     "errno.h": "c",
-    "sort.h": "c"
+    "sort.h": "c",
+    "stddef.h": "c"
   }
 }

@@ -1,12 +1,10 @@
 #include <math.h>
-#include <stdio.h>
 #include "io.h"
 #include "utils.h"
 #include "sort.h"
 #include "anagrams.h"
 
-int main(void)
-{   
+int main(void) {   
     /* == Setup == */
 
     // Clear the output file
@@ -14,7 +12,7 @@ int main(void)
     // Get the number of lines in the input file
     const size_t nLines = getNLines("input.txt"); 
     // Get the length of the longest line in the input file
-    const size_t longestLineLength = getlongestLineLengthLength("input.txt");
+    const size_t longestLineLength = getLongestLineLengthLength("input.txt");
     /* Set the maximum number of anagrams to the number of lines divided by two as each anagram
     requires at least one pair */
     const size_t maxNAnagrams = nLines / 2;
@@ -23,7 +21,7 @@ int main(void)
     to account for the maximum number of strings in any given anagram, adding 10 for the prefix
     "Anagram:" and adding floor(log10(maxNAnagrams) + 1) to account for the number of digits in the
     prefixed number */
-    const size_t maxAnagramLength = (longestLineLength + 3) * nLines + 10 + floor(log10(maxNAnagrams) + 1);
+    const size_t maxAnagramLength = (longestLineLength + 3) * nLines + 10 + (size_t)floor(log10(maxNAnagrams) + 1);
 
     /* == Input and Sort == */
 
@@ -48,6 +46,7 @@ int main(void)
     the anagrams array */
     formatAnagrams(anagrams, nAnagrams, maxAnagramLength);
     // Appends the formatted list of anagrams to the output
+    appendToOutput("output.txt", "Anagrams:");
     appendListToOutput("output.txt", nAnagrams, anagrams);
     appendToOutput("output.txt", "");
 
@@ -61,7 +60,7 @@ int main(void)
     the anagrams array while returning th number of pairings */
     nWouldBeAnagrams = formatWouldBeAnagrams(wouldBeAnagrams, nWouldBeAnagrams, maxAnagramLength);
     // Appends the formatted list of wouldBeAnagrams to the output
-    appendToOutput("output.txt", "Missing anagrams:");
+    appendToOutput("output.txt", "Missing Anagrams:");
     appendListToOutput("output.txt", nWouldBeAnagrams, wouldBeAnagrams);
 
     return 0;

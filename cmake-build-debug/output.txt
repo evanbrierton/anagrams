@@ -11,11 +11,15 @@ O, Draconian devil! Oh, lame saint!
 Old Immortal dovers
 Software engineering
 tac
-test
 Tom Marvolo Riddle
 UCD
 
-Anagram 1: "Act" "cat" "tac" 
-Anagram 2: "I am Lord Voldemort" "Tom Marvolo Riddle" 
-Anagram 3: "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!" 
+Anagrams:
+Anagram 1: "Act" "cat" "tac"
+Anagram 2: "I am Lord Voldemort" "Tom Marvolo Riddle"
 
+Missing Anagrams:
+Missing Anagram 1: "Old Immortal dovers" is an anagram of "I am Lord Voldemort" if 1 character is removed
+Missing Anagram 2: "Old Immortal dovers" is an anagram of "Tom Marvolo Riddle" if 1 character is removed
+Missing Anagram 3: "cuddle" is an anagram of "UCD" if 3 characters are removed
+Missing Anagram 4: "ducks" is an anagram of "UCD" if 2 characters are removed

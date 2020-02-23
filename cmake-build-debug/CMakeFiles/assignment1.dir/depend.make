@@ -11,9 +11,11 @@ CMakeFiles/assignment1.dir/main.c.o: ../anagrams.h
 CMakeFiles/assignment1.dir/main.c.o: ../io.h
 CMakeFiles/assignment1.dir/main.c.o: ../main.c
 CMakeFiles/assignment1.dir/main.c.o: ../sort.h
+CMakeFiles/assignment1.dir/main.c.o: ../utils.h
 
 CMakeFiles/assignment1.dir/sort.c.o: ../sort.c
 CMakeFiles/assignment1.dir/sort.c.o: ../utils.h
 
+CMakeFiles/assignment1.dir/utils.c.o: ../io.h
 CMakeFiles/assignment1.dir/utils.c.o: ../utils.c
 
