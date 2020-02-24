@@ -3,7 +3,7 @@
 
 // Function to compare two strings alphabetically disregarding case and punctuation
 bool compare(char * str1, char * str2) {
-  return strcmp(toLowerCase(cleanString(str1)), toLowerCase(cleanString(str2))) < 0;
+  return strncmp(toLowerCase(cleanString(str1)), toLowerCase(cleanString(str2)), strlen(str1)) < 0;
 }
 
 // Function to swap two strings

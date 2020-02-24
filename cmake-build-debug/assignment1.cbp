@@ -39,7 +39,7 @@
 			</Target>
 			<Target title="assignment1">
 				<Option output="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/assignment1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug"/>
+				<Option working_dir="."/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -59,7 +59,7 @@
 			</Target>
 			<Target title="assignment1/fast">
 				<Option output="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug/assignment1" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/evanbrierton/Desktop/Computer Science/Stage 1/Spring/Software Engineering Project 1/assignment1/cmake-build-debug"/>
+				<Option working_dir="."/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>

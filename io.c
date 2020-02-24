@@ -4,7 +4,7 @@
 #include "utils.h"
 
 // Function to clear all text from a file
-void clearFile(const char * file) {   
+void clearFile(const char * file) {
     /* Initialise fp to a pointer to the file to be wiped, opening with the "w" flag also clears
     the file */
     FILE * fp = fopen(file, "w");
@@ -42,21 +42,21 @@ size_t getNLines(const char * file) {
 }
 
 // Function to return the length of the longest line in the input file
-size_t getLongestLineLengthLength(const char * file) {   
+size_t getLongestLineLengthLength(const char * file) {
     /* Initialise variables to track the length of the current line being read and the maximum
     length read so far; */
     size_t length = 0, max = 0;
-    
+
     // Initialise fp to a pointer to the file in read mode
     FILE * fp = fopen(file, "r");
     // Check that the file has been found
     error(!fp, strerror(errno));
 
     // Iterate over each character in the file
-    for (int c = getc(fp); c != EOF; c = getc(fp)) {   
+    for (int c = getc(fp); c != EOF; c = getc(fp)) {
         // Increment length for each character in the line
         length++;
-        if (c == '\n') {  
+        if (c == '\n') {
             // At a newline set the max to the current length if it is the longest found
             if (length > max) max = length;
             // Reset the current line length to 0

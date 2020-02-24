@@ -7,7 +7,7 @@
 // Error handler
 void error(bool condition, const char * message) {
   if (condition) {
-    appendToOutput("output.txt", message);    // Print error message to output file
+    appendToOutput("error.txt", message);    // Print error message to output file
     fprintf(stderr, "Error: %s\n", message);  // Print error message to stderr
     exit(EXIT_FAILURE); // Terminate execution
   }
@@ -38,7 +38,7 @@ char * removeCharacters(char str[], char charactersToRemove[]) {
 
   // Initialise a new string so that the function is non-mutative
   char * cleanedString = newString(strlen(str));
-  
+
   // Set the current length of the new string string to 0
   size_t currentLength = 0;
 
@@ -56,7 +56,7 @@ char * cleanString(char * str) {
 }
 
 // Function to convert a string to lower case
-char * toLowerCase(char * str) { 
+char * toLowerCase(char * str) {
   // Initialise a new string of the same length so that the function is non-mutative
   char * lowerCasedString = newString(strlen(str));
   // Replace all capital characters with their corresponding lowercase characters
@@ -65,42 +65,6 @@ char * toLowerCase(char * str) {
   }
 
   return lowerCasedString;
-}
-
-// Shorthand function for convenience and maintainability
-
-/* Function to find a substring within an input string and return the index of the last character
-of the occurrence */
-int find(char * str, const char * substr) {   
-  // Iterate over the input string
-  for (size_t i = 0; i < strlen(str); i++) {
-    // Assume a match will be found
-    bool match = true;
-    // Iterate over each character in the substring
-    for (size_t j = 0; j < strlen(substr); j++) {
-      /* If any part of the substring does not match this section of the string break to continue
-      to the next character in the primary string */
-      if (str[i + j] != substr[j]) {
-        match = false;
-        break;
-      }
-    }
-    // Return the index, adding strlen(substr) - 1 so it is the last character of the occurrence
-    if (match == true) return (size_t)(i + strlen(substr) - 1);
-  }
-  // Return -1 if no match is found
-  return -1;
-}
-
-// Function to slice out a section of a string and return the slice
-char * slice(const char * str, size_t a, size_t b) {
-  // Initialise a new string of the length of the slice
-  char * slicedString = newString(b - a);
-  // Set each character in the sliced string
-  for (size_t i = 0; i < b - a; i++) slicedString[i] = str[i + a];
-  // Append the null terminator
-  slicedString[b - a] = '\0';
-  return slicedString;
 }
 
 /* A function to return the difference in length between two strings, ignoring certain characters

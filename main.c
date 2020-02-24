@@ -1,16 +1,17 @@
 #include <math.h>
+#include <stdio.h>
 #include "io.h"
 #include "utils.h"
 #include "sort.h"
 #include "anagrams.h"
 
-int main(void) {   
+int main(void) {
     /* == Setup == */
 
     // Clear the output file
     clearFile("output.txt");
     // Get the number of lines in the input file
-    const size_t nLines = getNLines("input.txt"); 
+    const size_t nLines = getNLines("input.txt");
     // Get the length of the longest line in the input file
     const size_t longestLineLength = getLongestLineLengthLength("input.txt");
     /* Set the maximum number of anagrams to the number of lines divided by two as each anagram
@@ -38,13 +39,14 @@ int main(void) {
 
     /* == Anagrams == */
 
+    /* Get a 2D integer array with each row containing the indices of the strings that have matched
+    with each-other */
+    int ** matches = getAnagrams(strings, isAnagram, nLines, longestLineLength);
     // Initialise anagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
     char ** anagrams = newStringArray(maxNAnagrams, maxAnagramLength);
-    // Feed generated anagrams into the anagrams array and return how many were generated
-    size_t nAnagrams = getAnagrams(strings, anagrams, isAnagram, nLines, longestLineLength); 
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array */
-    formatAnagrams(anagrams, nAnagrams, maxAnagramLength);
+    size_t nAnagrams = formatAnagrams(strings, anagrams, matches, maxAnagramLength);
     // Appends the formatted list of anagrams to the output
     appendToOutput("output.txt", "Anagrams:");
     appendListToOutput("output.txt", nAnagrams, anagrams);
@@ -52,13 +54,14 @@ int main(void) {
 
     /* == Would Be Anagrams == */
 
+    /* Get a 2D integer array with each row containing the indices of the strings that have matched
+    with each-other given the constraints */
+    int ** wouldBeMatches = getAnagrams(strings, wouldBeAnagram, nLines, longestLineLength);
     // Initialise wouldBeAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
     char ** wouldBeAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
-    // Feed generated wouldBeAnagrams into the wouldBeAnagrams array and return how many were generated
-    size_t nWouldBeAnagrams = getAnagrams(strings, wouldBeAnagrams, wouldBeAnagram, nLines, longestLineLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array while returning th number of pairings */
-    nWouldBeAnagrams = formatWouldBeAnagrams(wouldBeAnagrams, nWouldBeAnagrams, maxAnagramLength);
+    size_t nWouldBeAnagrams = formatWouldBeAnagrams(strings, wouldBeAnagrams, wouldBeMatches, maxAnagramLength);
     // Appends the formatted list of wouldBeAnagrams to the output
     appendToOutput("output.txt", "Missing Anagrams:");
     appendListToOutput("output.txt", nWouldBeAnagrams, wouldBeAnagrams);

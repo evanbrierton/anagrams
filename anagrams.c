@@ -4,7 +4,7 @@
 #include <math.h>
 #include "utils.h"
 
-/* unction to count the number of each letter in a string and store the count in a corresponding
+/* Function to count the number of each letter in a string and store the count in a corresponding
 array index */
 size_t * countLetters(char * str) {
   // Initialise a counter array of length 26 and set each value within it to 0
@@ -65,14 +65,16 @@ bool wouldBeAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 }
 
 // Function to obtain the list of both anagrams and wouldBeAnagrams
-size_t getAnagrams(char ** strings, char ** target, bool (*compare)(size_t, size_t, size_t **, char ** strings), size_t nLines, size_t longestLineLength)
+int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, char ** strings), size_t nLines, size_t longestLineLength)
 {
-  // Values to use for array initialisations, these values are explained in main.c
-  const size_t maxNAnagrams = nLines / 2;
-  const size_t maxAnagramLength = (longestLineLength + 3) * nLines + 10 + (size_t)floor(log10(maxNAnagrams) + 1);
+
+  /* Initialise a 2D Integer array that stores a representation of each anagram match as a list
+  of their indices in the input strings array */
+  int ** matches = malloc(nLines * sizeof(int*));
 
   // Initialise a map to count the characters of each string
-  size_t ** map;
+  size_t ** map = NULL;
+
   /* If the compare function is only checking for true anagrams only one map needs to be generated
   with effectively no cutoff */
   if (compare == isAnagram) map = generateMap(strings, nLines, longestLineLength);
@@ -84,91 +86,88 @@ size_t getAnagrams(char ** strings, char ** target, bool (*compare)(size_t, size
   size_t nAnagrams = 0;
   // Iterate over each string
   for (size_t i = 0; i < nLines; i++)
+  {
+    // Allocate memory to each row of the matches array
+    matches[i] = malloc(nLines * sizeof(int));
     // Check if the string in question has been matched before
     if(!(matched[i]))
     {
-      /* If the function is looking for wouldBeAnagrams a new map is needed for each string, with the
-      cutoff being the length of said string */
-      if (compare == wouldBeAnagram) map = generateMap(strings, nLines, strlen(cleanString(strings[i])));
+      /* If the function is looking for wouldBeAnagrams a new map is needed for each string, with
+      the cutoff being the length of said string */
+      if (compare == wouldBeAnagram) {
+        map = generateMap(strings, nLines, strlen(cleanString(strings[i])));
+      }
 
-      // Initialise a string to store the anagram
-      char * anagram = newString(maxAnagramLength);
-
-      // Append the root word to the beginning of the anagram string
-      snprintf(anagram, maxAnagramLength, "\"%s\"", strings[i]);
+      // Append the index of the root word to the start of the row
+      matches[nAnagrams][0] = i;
+      size_t anagramLength = 1;
       // Assume the string has no matching anagram
       bool foundMatch = false;
       /* Iterate over every other string including strings before the current one in the list
-      as in this case of wouldBeAnagrams each string can be part of more than one match */ 
+      as in this case of wouldBeAnagrams each string can be part of more than one match */
       for (size_t j = 0; j < nLines; j++)
       {
         // Avoid comparing a string with itself and then check for a match
         if (j != i && compare(i, j, map, strings))
         {
-          // Append the match to the output string
-          snprintf(anagram, maxAnagramLength, "%s \"%s\"", anagram, strings[j]);
+          // Append each match to the row
+          matches[nAnagrams][anagramLength++] = j;
           /* Set matched[j] to true to avoid recounting, set foundMatch to true
           so that the total string can be copied to the output */
           matched[j] = foundMatch = true;
         }
       }
-      // Copy string to output
-      if (foundMatch) strcpy(target[nAnagrams++], anagram);
+      // Append -1 to the end of the row to indicate the formatter can stop parsing there
+      if (foundMatch) matches[nAnagrams++][anagramLength] = -1;
     }
+  }
+  // Append -1 at the end of all the rows for the formatter to stop parsing
+  matches[nAnagrams][0] = -1;
   // Return number of anagrams found
-  return nAnagrams;
+  return matches;
 }
 
 // Function to format the list of anagrams for printing to the output file
-void formatAnagrams(char ** target, size_t nAnagrams, size_t maxAnagramLength) {
-    // Iterate over each anagram
-    for (size_t i = 0; i < nAnagrams; i++) {
-        /* For each anagram in the list append the prefix "Anagram n:" where n is it's position in the
-        list and feed it to it's corresponding index in the target array */
-        char * formattedString = newString(maxAnagramLength);
-        snprintf(formattedString, maxAnagramLength, "Anagram %zu: %s", i + 1, target[i]);
-        strcpy(target[i], formattedString);
+size_t formatAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
+    // Initialise a counter to keep track of the number of anagrams generated
+    size_t i;
+    // Iterate over the matches array
+    for (i = 0; matches[i][0] >= 0; i++) {
+      // Append the root word to the beginning of the string
+      snprintf(target[i], maxLength, "Anagram %zu: \"%s\"", i + 1, strings[matches[i][0]]);
+      for (size_t j = 1; matches[i][j] >= 0; j++) {
+        // Append every other word to the string
+        snprintf(target[i], maxLength, "%s \"%s\"", target[i], strings[matches[i][j]]);
+      }
     }
-}
-
-/* Recursive partition function to aid formatting the wouldBeAnagrams and returning the number of
-lines in the formatted list */
-size_t formatterPartition(char * root, char * remainder, char ** target, size_t maxLength, size_t currentLength) {   
-    // Finds the index of any space immediately preceded by a quotation mark in the string
-    int index = find(remainder, "\" ");
-    /* Gets the difference between the root string of the wouldBeAnagram and the total length of
-    the remaining strings */
-    size_t difference = getStringDiff(remainder, root);
-    // find() returns -1 if no index is found meaning there is only one string left in the remainder
-    if(index == -1) {
-        // Append each string to the target array
-        snprintf(target[currentLength], maxLength, "Missing Anagram %zu: %s is an anagram of %s if %zu character%s removed", currentLength + 1, remainder, root, difference, difference == 1 ? " is" : "s are");
-        // return the length
-        return currentLength + 1;
-    }
-    /* If there is more than one string in the remainder partition it at the first space character
-    and run the function again on each partition returning the greater index */
-    formatterPartition(root, slice(remainder, 0, index), target, maxLength, currentLength);
-    return formatterPartition(root, slice(remainder, index + 1, strlen(remainder)), target, maxLength, currentLength + 1);
+    // Return the count
+    return i;
 }
 
 // Function to format the wouldBeAnagrams for printing and return the number formatted
-size_t formatWouldBeAnagrams(char ** target, size_t nAnagrams, size_t maxAnagramLength) {
-    // Initialise the length of the list of formatted wouldBeAnagrams to 0
-    size_t length = 0;
-    // Iterate through each one of the found wouldBeAnagrams
-    for (size_t i = 0; i < nAnagrams; i++) {
-        // Find the index of the first space character immediately preceded by a quotation mark
-        int spaceIndex = find(target[i], "\" ");
-        /* The root will always be the smallest string in the list because its map is the only one
-        that the wouldBeAnagrams are found in */
-        char * root = slice(target[i], 0, spaceIndex);
-        // The remainder wil be the rest of the strings excluding the smallest string
-        char * remainder = slice(target[i], spaceIndex + 1, strlen(target[i]));
-        /* The remainder is then recursively broken down into its constituent strings and each
-        string is matched to the root for printing */
-        length = formatterPartition(root, remainder, target, maxAnagramLength, length);
+size_t formatWouldBeAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
+    // Initialise a counter to keep track of the number of wouldBeAnagrams generated
+    size_t currentLength = 0;
+    // Iterate over the matches array
+    for (size_t i = 0; matches[i][0] >= 0; i++) {
+      for (size_t j = 1; matches[i][j] >= 0; j++) {
+        // Calculate the difference between the root word and each other string
+        size_t difference = getStringDiff(strings[matches[i][j]], strings[matches[i][0]]);
+        // Append each match to the list of strings
+        /* This method works because root will always be the smallest string in the list as its
+        map is the only one that the wouldBeAnagrams are found in */
+        snprintf(
+          target[currentLength],
+          maxLength,
+          "Missing Anagram %zu: \"%s\" is an anagram of \"%s\" if %zu character%s removed",
+          currentLength + 1, 
+          strings[matches[i][0]],
+          strings[matches[i][j]],
+          difference,
+          difference == 1 ? " is" : "s are"
+        );
+        currentLength++;
+      }
     }
-    return length;
+    return currentLength;
 }
-
