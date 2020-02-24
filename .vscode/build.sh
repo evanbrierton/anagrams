@@ -11,3 +11,7 @@ cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Debug ..
 
 # Build
 make
+
+# Execute
+
+/Users/evanbrierton/Desktop/Computer\ Science/Stage\ 1/Spring/Software\ Engineering\ Project\ 1/assignment1/build/assignment1
