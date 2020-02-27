@@ -32,8 +32,10 @@ size_t ** generateMap(char ** strings, size_t nLines, size_t cutoff) {
     // Ignores all characters in the string past the cutoff point
     if (cutoff < strlen(cleanedString)) cleanedString[cutoff] = '\0';
     // Copies each countLetters array to its corresponding index in the map
-    memcpy(map[i], countLetters(cleanedString), 26 * sizeof(size_t));
+    size_t * counter = countLetters(cleanedString);
+    memcpy(map[i], counter, 26 * sizeof(size_t));
     free(cleanedString);
+    free(counter);
   }
 
   return map;
