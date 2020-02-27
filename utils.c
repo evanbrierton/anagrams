@@ -18,7 +18,7 @@ void error(bool condition, const string message) {
 // Function to allocate memory for a new string based on an input length and return the string
 string newString(size_t length) {
   // Add 1 to the length to account for the null terminator and cast to char*
-  string str = (string)malloc((length + 1) * sizeof(char));
+  string str = (string)calloc(length + 1, sizeof(char));
   return str;
 }
 
