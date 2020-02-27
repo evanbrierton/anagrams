@@ -7,8 +7,8 @@
 void clearFile(const string file);
 size_t getNLines(const string file);
 size_t getLongestLineLengthLength(const string file);
-void getInput(const string input, char ** target, size_t lineLength);
+void getInput(const string input, string * target, size_t lineLength);
 void appendToOutput(const string output, const string string);
-void appendListToOutput(const string output, size_t lines, char ** strings);
+void appendListToOutput(const string output, size_t lines, string * strings);
 
 #endif

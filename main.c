@@ -27,7 +27,7 @@ int main(void) {
     /* == Input and Sort == */
 
     // Initialise strings to a new string array of dimensions (nLines + 1) * longestLineLength
-    char ** strings = newStringArray(nLines + 1, longestLineLength);
+    string * strings = newStringArray(nLines + 1, longestLineLength);
     // Feed the input from the text file into strings
     getInput("input.txt", strings, longestLineLength);
     // Sort strings alphabetically (case insensitive)
@@ -43,7 +43,7 @@ int main(void) {
     with each-other */
     int ** matches = getAnagrams(strings, isAnagram, nLines, longestLineLength);
     // Initialise anagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    char ** anagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    string * anagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array */
     size_t nAnagrams = formatAnagrams(strings, anagrams, matches, maxAnagramLength);
@@ -58,7 +58,7 @@ int main(void) {
     with each-other given the constraints */
     int ** wouldBeMatches = getAnagrams(strings, isMissingAnagram, nLines, longestLineLength);
     // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    char ** missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    string * missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array while returning th number of pairings */
     size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, wouldBeMatches, maxAnagramLength);

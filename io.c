@@ -68,7 +68,7 @@ size_t getLongestLineLengthLength(const string file) {
 }
 
 // Function to read input from a text file and output each line to a string array
-void getInput(const string input, char ** target, size_t lineLength) {
+void getInput(const string input, string * target, size_t lineLength) {
     // Initialise fp to a pointer to the input file
     FILE * fp = fopen(input, "r");
     // Check if  file has been found
@@ -97,7 +97,7 @@ void appendToOutput(const string output, const string string) {
 }
 
 // Function to append an array of strings to the output file
-void appendListToOutput(const string output, size_t lines, char ** strings) {
+void appendListToOutput(const string output, size_t lines, string * strings) {
     // For each string in the array call appendToOutput on the string
     for (size_t i = 0; i < lines; i++) appendToOutput(output, strings[i]);
 }

@@ -19,7 +19,7 @@ size_t * countLetters(string str) {
 }
 
 // Function to generate counter array for each string
-size_t ** generateMap(char ** strings, size_t nLines, size_t cutoff) {
+size_t ** generateMap(string * strings, size_t nLines, size_t cutoff) {
   // Allocate enough memory to the map to contain a counter array for each string
   size_t ** map = (size_t**)malloc(nLines * sizeof(size_t*));
   // Iterate over each string
@@ -43,7 +43,7 @@ size_t ** generateMap(char ** strings, size_t nLines, size_t cutoff) {
 
 /* Function to determine whether two strings are anagrams of each-other using their indices within
 the generated map */
-bool isAnagram(size_t a, size_t b, size_t ** map, char ** strings)
+bool isAnagram(size_t a, size_t b, size_t ** map, string * strings)
 {
   /* Preemptively eliminate strings that are not the same length when non-alphabetical characters
   have been removes */
@@ -55,7 +55,7 @@ bool isAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 
 /* Function to determine whether two strings would be anagrams of each-other if n characters was
 removed from the end of one of them */
-bool isMissingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
+bool isMissingAnagram(size_t a, size_t b, size_t ** map, string * strings)
 {
   /* Preemptively eliminate all strings of the same length as these have been dealt with in
   isAnagram() */
@@ -68,7 +68,7 @@ bool isMissingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 }
 
 // Function to obtain the list of both anagrams and missingAnagrams
-int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, char ** strings), size_t nLines, size_t longestLineLength)
+int ** getAnagrams(string * strings, bool (*compare)(size_t, size_t, size_t **, string * strings), size_t nLines, size_t longestLineLength)
 {
 
   /* Initialise a 2D Integer array that stores a representation of each anagram match as a list
@@ -139,7 +139,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
 }
 
 // Function to format the list of anagrams for printing to the output file
-size_t formatAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
+size_t formatAnagrams(string * strings, string * target, int ** matches, size_t maxLength) {
     // Initialise a counter to keep track of the number of anagrams generated
     size_t i;
     // Iterate over the matches array
@@ -156,7 +156,7 @@ size_t formatAnagrams(char ** strings, char ** target, int ** matches, size_t ma
 }
 
 // Function to format the missingAnagrams for printing and return the number formatted
-size_t formatMissingAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
+size_t formatMissingAnagrams(string * strings, string * target, int ** matches, size_t maxLength) {
     // Initialise a counter to keep track of the number of missingAnagrams generated
     size_t currentLength = 0;
     // Iterate over the matches array

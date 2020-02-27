@@ -28,7 +28,7 @@ void swap(string str1, string str2) {
 }
 
 // Partition function for the qsort algorithm
-size_t partition(char ** strings, size_t left, size_t right) {
+size_t partition(string * strings, size_t left, size_t right) {
   // Sets the pivot to the last index in the subarray
   string pivot = strings[(left + right) / 2];
   // Sets i to the first index of the subarray to track how many elements have been sorted
@@ -47,7 +47,7 @@ size_t partition(char ** strings, size_t left, size_t right) {
 }
 
 // Function to sort an array of strings alphabetically using quicksort
-void sort(char ** strings, int left, int right) {
+void sort(string * strings, int left, int right) {
   // Check that there is still a remaining subarray to be sorted
   if (left < right && right > 0) {
     // Sort a section of the array and return the pivot index to be used in the next calls
