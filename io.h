@@ -1,13 +1,14 @@
 #include <stddef.h>
+#include "utils.h"
 
 #ifndef IO_H
 #define IO_H
 
-void clearFile(const char * file);
-size_t getNLines(const char * file);
-size_t getLongestLineLengthLength(const char * file);
-void getInput(const char * input, char ** target, size_t lineLength);
-void appendToOutput(const char * output, const char * string);
-void appendListToOutput(const char * output, size_t lines, char ** strings);
+void clearFile(const string file);
+size_t getNLines(const string file);
+size_t getLongestLineLengthLength(const string file);
+void getInput(const string input, char ** target, size_t lineLength);
+void appendToOutput(const string output, const string string);
+void appendListToOutput(const string output, size_t lines, char ** strings);
 
 #endif

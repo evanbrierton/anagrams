@@ -1,13 +1,14 @@
 #include <string.h>
+#include <stdio.h>
 #include "utils.h"
 
 // Function to compare two strings alphabetically disregarding case and punctuation
-bool compare(char * str1, char * str2) {
+bool compare(string str1, string str2) {
   return strncmp(toLowerCase(cleanString(str1)), toLowerCase(cleanString(str2)), strlen(str1)) < 0;
 }
 
 // Function to swap two strings
-void swap(char * str1, char * str2) {
+void swap(string str1, string str2) {
     // Initialisation of tmp variables to store the strings during swap
     char tmp1[strlen(str1) + 1], tmp2[strlen(str2) + 1];
 
@@ -21,7 +22,7 @@ void swap(char * str1, char * str2) {
 // Partition function for the qsort algorithm
 size_t partition(char ** strings, size_t left, size_t right) {
   // Sets the pivot to the last index in the subarray
-  char * pivot = strings[right];
+  string pivot = strings[(left + right) / 2];
   // Sets i to the first index of the subarray to track how many elements have been sorted
   size_t i = left;
 
@@ -49,3 +50,4 @@ void sort(char ** strings, int left, int right) {
     sort(strings, (size_t)(pivotIndex + 1), right);
   }
 }
+

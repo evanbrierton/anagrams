@@ -1,5 +1,5 @@
 #include <math.h>
-#include <stdio.h>
+#include <stdlib.h>
 #include "io.h"
 #include "utils.h"
 #include "sort.h"
@@ -31,7 +31,7 @@ int main(void) {
     // Feed the input from the text file into strings
     getInput("input.txt", strings, longestLineLength);
     // Sort strings alphabetically (case insensitive)
-    sort(strings, 0, (size_t)(nLines - 1));
+    sort(strings, 0, (size_t)(nLines - 1), toLowerCase);
     // Append sorted list of strings to the output file
     appendToOutput("output.txt", "The sorted list of words follows:");
     appendListToOutput("output.txt", nLines, strings);
@@ -56,15 +56,20 @@ int main(void) {
 
     /* Get a 2D integer array with each row containing the indices of the strings that have matched
     with each-other given the constraints */
-    int ** wouldBeMatches = getAnagrams(strings, wouldBeAnagram, nLines, longestLineLength);
-    // Initialise wouldBeAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    char ** wouldBeAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    int ** wouldBeMatches = getAnagrams(strings, missingAnagram, nLines, longestLineLength);
+    // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
+    char ** missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array while returning th number of pairings */
-    size_t nWouldBeAnagrams = formatWouldBeAnagrams(strings, wouldBeAnagrams, wouldBeMatches, maxAnagramLength);
-    // Appends the formatted list of wouldBeAnagrams to the output
+    size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, wouldBeMatches, maxAnagramLength);
+    // Appends the formatted list of missingAnagrams to the output
     appendToOutput("output.txt", "Missing Anagrams:");
-    appendListToOutput("output.txt", nWouldBeAnagrams, wouldBeAnagrams);
+    appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
+    
+    // Deallocate memory
+    for (size_t i = 0; i < nLines; i++) free(strings[i]);
+    free(strings);
+    
 
     return 0;
 }
