@@ -76,7 +76,7 @@ int main(void) {
         free(missingMatches[i]);
     }
     for (size_t i = 0; i < maxNAnagrams; i++) {
-        free(anagrams[i]);
+        // free(anagrams[i]);
         free(missingAnagrams[i]);
     }
     

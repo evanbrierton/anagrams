@@ -186,5 +186,6 @@ size_t formatMissingAnagrams(string * strings, string * target, int ** matches, 
         currentLength++;
       }
     }
+    
     return currentLength;
 }
