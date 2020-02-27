@@ -53,7 +53,7 @@ bool isAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 
 /* Function to determine whether two strings would be anagrams of each-other if n characters was
 removed from the end of one of them */
-bool missingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
+bool isMissingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 {
   /* Preemptively eliminate all strings of the same length as these have been dealt with in
   isAnagram() */
@@ -95,7 +95,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
     {
       /* If the function is looking for missingAnagrams a new map is needed for each string, with
       the cutoff being the length of said string */
-      if (compare == missingAnagram) {
+      if (compare == isMissingAnagram) {
         map = generateMap(strings, nLines, strlen(cleanString(strings[i])));
       }
 
