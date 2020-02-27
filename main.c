@@ -67,9 +67,14 @@ int main(void) {
     appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
     
     // Deallocate memory
-    for (size_t i = 0; i < nLines; i++) free(strings[i]);
+    for (size_t i = 0; i < nLines; i++) {
+        free(strings[i]);
+        free(matches[i]);
+        free(wouldBeMatches[i]);
+    }
     free(strings);
-    
+    free(matches);
+    free(wouldBeMatches);
 
     return 0;
 }
