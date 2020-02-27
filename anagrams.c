@@ -96,7 +96,9 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
       /* If the function is looking for missingAnagrams a new map is needed for each string, with
       the cutoff being the length of said string */
       if (compare == isMissingAnagram) {
-        map = generateMap(strings, nLines, strlen(cleanString(strings[i])));
+        string cleanedString = cleanString(strings[i]);
+        map = generateMap(strings, nLines, strlen(cleanedString));
+        free(cleanedString);
       }
 
       // Append the index of the root word to the start of the row
