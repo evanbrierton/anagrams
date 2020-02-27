@@ -1,26 +1,22 @@
 The sorted list of words follows:
-Act
 cat
-ducks
-Computer science
-I am Lord Voldemort
-cuddle
 Leonardo da Vinci! The Mona Lisa!
-Hey there!
-tac
 O, Draconian devil! Oh, lame saint!
-Tom Marvolo Riddle
-Old Immortal dovers
 Software engineering
+Computer science
+tac
+Act
+Tom Marvolo Riddle
+
+cuddle
+ducks
+Hey there!
+I am Lord Voldemort
 UCD
+Old Immortal dovers
 
 Anagrams:
-Anagram 1: "Act" "cat" "tac"
-Anagram 2: "I am Lord Voldemort" "Tom Marvolo Riddle"
-Anagram 3: "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!"
+Anagram 1: "cat" "tac" "Act"
+Anagram 2: "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!"
+Anagram 3: "Tom Marvolo Riddle" "I am Lord Voldemort"
 
-Missing Anagrams:
-Missing Anagram 1: "I am Lord Voldemort" is an anagram of "Old Immortal dovers" if 1 character is removed
-Missing Anagram 2: "Tom Marvolo Riddle" is an anagram of "Old Immortal dovers" if 1 character is removed
-Missing Anagram 3: "UCD" is an anagram of "ducks" if 2 characters are removed
-Missing Anagram 4: "UCD" is an anagram of "cuddle" if 3 characters are removed

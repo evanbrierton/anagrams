@@ -18,7 +18,7 @@ void clearFile(const string file) {
 // Function to calculate the number of lines in an input file
 size_t getNLines(const string file) {
     // Initialise variable to track the number of lines in the file
-    size_t lines = 1;
+    size_t lines = 0;
 
     // Initialise fp to the input file in read mode
     FILE * fp = fopen(file, "r");
