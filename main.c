@@ -70,6 +70,7 @@ int main(void) {
     for (size_t i = 0; i < nLines; i++) {
         free(strings[i]);
         free(matches[i]);
+        free(anagrams[i]);
         // free(wouldBeMatches[i]);
     }
     free(strings);
