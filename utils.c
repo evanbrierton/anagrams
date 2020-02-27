@@ -18,14 +18,14 @@ void error(bool condition, const string message) {
 // Function to allocate memory for a new string based on an input length and return the string
 string newString(size_t length) {
   // Add 1 to the length to account for the null terminator and cast to char*
-  string str = (string)calloc(length + 1, sizeof(char));
+  string str = calloc(length + 1, sizeof(char));
   return str;
 }
 
 // Function to allocate memory for a new string array
 string * newStringArray(size_t arrayLength, size_t stringLength) {
   // Allocate memory to the array itself
-  string * array = (string*)malloc(arrayLength * sizeof(char*));
+  string * array = malloc(arrayLength * sizeof(char*));
   // Allocate enough memory for each string in the array
   for (size_t i = 0; i < arrayLength; i++) array[i] = newString(stringLength);
   return array;

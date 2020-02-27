@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <stdlib.h>
 #include "utils.h"
 
 // Function to clear all text from a file
@@ -97,7 +98,10 @@ void appendToOutput(const string output, const string string) {
 }
 
 // Function to append an array of strings to the output file
-void appendListToOutput(const string output, size_t lines, string * strings) {
+void appendListToOutput(const string output, size_t lines, string * strings, bool freeStrings) {
     // For each string in the array call appendToOutput on the string
-    for (size_t i = 0; i < lines; i++) appendToOutput(output, strings[i]);
+    for (size_t i = 0; i < lines; i++) {
+        appendToOutput(output, strings[i]);
+        if(freeStrings) free(strings[i]);
+    }
 }
