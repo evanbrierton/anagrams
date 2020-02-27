@@ -5,6 +5,9 @@
 #include "sort.h"
 #include "anagrams.h"
 
+#include <stdio.h>
+
+
 int main(void) {
     /* == Setup == */
 
@@ -52,38 +55,37 @@ int main(void) {
     appendListToOutput("output.txt", nAnagrams, anagrams);
     appendToOutput("output.txt", "");
 
-    // /* == Would Be Anagrams == */
+    /* == Would Be Anagrams == */
 
-    // /* Get a 2D integer array with each row containing the indices of the strings that have matched
-    // with each-other given the constraints */
-    // int ** missingMatches = getAnagrams(strings, isMissingAnagram, nLines, longestLineLength);
-    // // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    // string * missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
-    // /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
-    // the anagrams array while returning th number of pairings */
-    // size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, missingMatches, maxAnagramLength);
-    // // Appends the formatted list of missingAnagrams to the output
-    // appendToOutput("output.txt", "Missing Anagrams:");
-    // appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
+    /* Get a 2D integer array with each row containing the indices of the strings that have matched
+    with each-other given the constraints */
+    int ** missingMatches = getAnagrams(strings, isMissingAnagram, nLines, longestLineLength);
+    // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
+    string * missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
+    the anagrams array while returning th number of pairings */
+    size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, missingMatches, maxAnagramLength);
+    // Appends the formatted list of missingAnagrams to the output
+    appendToOutput("output.txt", "Missing Anagrams:");
+    appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
 
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {
         free(strings[i]);
         free(matches[i]);
-        // free(missingMatches[i]);
-        if (i < maxNAnagrams)
-        {
-            free(anagrams[i]);
-            // free(missingAnagrams[i]);
-        }
+        free(missingMatches[i]);
+    }
+    for (size_t i = 0; i < maxNAnagrams; i++) {
+        free(anagrams[i]);
+        free(missingAnagrams[i]);
     }
     
     free(strings);
     free(strings[nLines]);
     free(matches);
     free(anagrams);
-    // free(missingMatches);
-    // free(missingAnagrams);
+    free(missingMatches);
+    free(missingAnagrams);
 
     return 0;
 }
