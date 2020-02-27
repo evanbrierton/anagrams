@@ -56,7 +56,7 @@ int main(void) {
 
     /* Get a 2D integer array with each row containing the indices of the strings that have matched
     with each-other given the constraints */
-    int ** wouldBeMatches = getAnagrams(strings, missingAnagram, nLines, longestLineLength);
+    int ** wouldBeMatches = getAnagrams(strings, isMissingAnagram, nLines, longestLineLength);
     // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
     char ** missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
