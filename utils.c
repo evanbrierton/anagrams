@@ -25,7 +25,7 @@ string newString(size_t length) {
 // Function to allocate memory for a new string array
 string * newStringArray(size_t arrayLength, size_t stringLength) {
   // Allocate memory to the array itself
-  string * array = malloc(arrayLength * sizeof(char*));
+  string * array = (string*)malloc(arrayLength * sizeof(char*));
   // Allocate enough memory for each string in the array
   for (size_t i = 0; i < arrayLength; i++) array[i] = newString(stringLength);
   return array;

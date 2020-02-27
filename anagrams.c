@@ -8,7 +8,7 @@
 array index */
 size_t * countLetters(string str) {
   // Initialise a counter array of length 26 and set each value within it to 0
-  size_t * counter = calloc(26, sizeof(size_t));
+  size_t * counter = (size_t*)calloc(26, sizeof(size_t));
   // Iterate through each character in the string
   for (size_t i = 0; i < strlen(str); i++) {
     // If the character is alphabetical increment it's corresponding index in the array
@@ -21,14 +21,14 @@ size_t * countLetters(string str) {
 // Function to generate counter array for each string
 size_t ** generateMap(char ** strings, size_t nLines, size_t cutoff) {
   // Allocate enough memory to the map to contain a counter array for each string
-  size_t ** map = malloc(nLines * sizeof(size_t*));
+  size_t ** map = (size_t**)malloc(nLines * sizeof(size_t*));
   // Iterate over each string
   for (size_t i = 0; i < nLines; i++)
   {
     // Converts each string to one containing only alphabetical characters
     string cleanedString = cleanString(strings[i]);
     // Allocates enough memory to each index of the map to contain a single counter array
-    map[i] = malloc(26 * sizeof(size_t));
+    map[i] = (size_t*)malloc(26 * sizeof(size_t));
     // Ignores all characters in the string past the cutoff point
     if (cutoff < strlen(cleanedString)) cleanedString[cutoff] = '\0';
     // Copies each countLetters array to its corresponding index in the map
@@ -71,7 +71,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
 
   /* Initialise a 2D Integer array that stores a representation of each anagram match as a list
   of their indices in the input strings array */
-  int ** matches = malloc(nLines * sizeof(int*));
+  int ** matches = (int**)malloc(nLines * sizeof(int*));
 
   // Initialise a map to count the characters of each string
   size_t ** map = NULL;
@@ -81,7 +81,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
   if (compare == isAnagram) map = generateMap(strings, nLines, longestLineLength);
   /* Initialise an array to keep track of which indices in the list of strings have been matched
   already to avoid double counting anagrams */
-  size_t * matched = calloc(nLines, sizeof(size_t));
+  size_t * matched = (size_t*)calloc(nLines, sizeof(size_t));
 
   // Initialise a counter for the number of anagrams found
   size_t nAnagrams = 0;
@@ -89,7 +89,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
   for (size_t i = 0; i < nLines; i++)
   {
     // Allocate memory to each row of the matches array
-    matches[i] = malloc(nLines * sizeof(int));
+    matches[i] = (int*)malloc(nLines * sizeof(int));
     // Check if the string in question has been matched before
     if(!(matched[i]))
     {
