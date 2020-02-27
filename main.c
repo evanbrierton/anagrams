@@ -26,8 +26,8 @@ int main(void) {
 
     /* == Input and Sort == */
 
-    // Initialise strings to a new string array of dimensions nLines * longestLineLength
-    char ** strings = newStringArray(nLines, longestLineLength);
+    // Initialise strings to a new string array of dimensions (nLines + 1) * longestLineLength
+    char ** strings = newStringArray(nLines + 1, longestLineLength);
     // Feed the input from the text file into strings
     getInput("input.txt", strings, longestLineLength);
     // Sort strings alphabetically (case insensitive)
