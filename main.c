@@ -79,6 +79,7 @@ int main(void) {
     }
     
     free(strings);
+    free(strings[nLines]);
     free(matches);
     free(anagrams);
     free(missingMatches);
