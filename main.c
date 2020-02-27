@@ -71,13 +71,13 @@ int main(void) {
 
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {
-        // free(strings[i]);
+        free(strings[i]);
         free(matches[i]);
         free(missingMatches[i]);
     }
     for (size_t i = 0; i < maxNAnagrams; i++) {
-        // free(anagrams[i]);
-        // free(missingAnagrams[i]);
+        free(anagrams[i]);
+        free(missingAnagrams[i]);
     }
     
     // free(strings);
