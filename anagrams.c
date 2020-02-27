@@ -98,8 +98,6 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
       /* If the function is looking for missingAnagrams a new map is needed for each string, with
       the cutoff being the length of said string */
       if (compare == isMissingAnagram) {
-        for (size_t i = 0; i < nLines; i++) free(map[i]);
-        free(map);
         string cleanedString = cleanString(strings[i]);
         map = generateMap(strings, nLines, strlen(cleanedString));
         free(cleanedString);
