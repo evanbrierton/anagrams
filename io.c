@@ -65,6 +65,7 @@ size_t getLongestLineLengthLength(const string file) {
         }
     };
     // Return max + 1 to account for the inclusion of the null terminator
+    fclose(fp);
     return max + 1;
 }
 
