@@ -45,7 +45,7 @@ bool isAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 {
   /* Preemptively eliminate strings that are not the same length when non-alphabetical characters
   have been removes */
-  if(strlen(cleanString(strings[a])) != strlen(cleanString(strings[b]))) return false;
+  if(getStringDiff(strings[a], strings[b]) != 0) return false;
   // For each letter check that the same number of that letter exist in each string
   for (size_t i = 0; i < 26; i++) if(map[a][i] != map[b][i]) return false;
   return true;
@@ -57,7 +57,7 @@ bool isMissingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 {
   /* Preemptively eliminate all strings of the same length as these have been dealt with in
   isAnagram() */
-  if(strlen(cleanString(strings[a])) == strlen(cleanString(strings[b]))) return false;
+  if(getStringDiff(strings[a], strings[b]) == 0) return false;
   /* For each letter check that the same number of that letter exist in each string
   (this works despite the varying string lengths because of the cutoff the map ignores all
   characters over the length of string a) */
