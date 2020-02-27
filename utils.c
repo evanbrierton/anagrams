@@ -73,5 +73,8 @@ string toLowerCase(string str) {
 defined in the cleanString function */
 size_t getStringDiff(string str1, string str2) {
   string cleanedString1 = cleanString(str1), cleanedString2 = cleanString(str2);
-  return abs((int)strlen(cleanedString1) - (int)strlen(cleanedString2));
+  size_t difference = abs((int)strlen(cleanedString1) - (int)strlen(cleanedString2));
+  free(cleanedString1);
+  free(cleanedString2);
+  return difference;
 }
