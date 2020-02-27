@@ -14,3 +14,8 @@ UCD
 tac
 cat
 
+Anagrams:
+Anagram 1: "Act" "tac" "cat"
+Anagram 2: "I am Lord Voldemort" "Tom Marvolo Riddle"
+Anagram 3: "Leonardo da Vinci! The Mona Lisa!" "O, Draconian devil! Oh, lame saint!"
+
