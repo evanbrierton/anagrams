@@ -124,7 +124,10 @@ int ** getAnagrams(string * strings, bool (*compare)(size_t, size_t, size_t **, 
       }
       // Append -1 to the end of the row to indicate the formatter can stop parsing there
       if (foundMatch) matches[nAnagrams++][anagramLength] = -1;
-      if (compare == isMissingAnagram) free(map);
+      if (compare == isMissingAnagram) {
+      for (size_t j = 0; j < nLines; j++) free(map[j]);
+      free(map);
+    }
     }
   }
   // Append -1 at the end of all the rows for the formatter to stop parsing
