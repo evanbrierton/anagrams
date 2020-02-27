@@ -102,6 +102,6 @@ void appendListToOutput(const string output, size_t lines, string * strings, boo
     // For each string in the array call appendToOutput on the string
     for (size_t i = 0; i < lines; i++) {
         appendToOutput(output, strings[i]);
-        if(freeStrings) free(strings[i]);
+        // if(freeStrings) free(strings[i]);
     }
 }
