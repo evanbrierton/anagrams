@@ -71,7 +71,7 @@ int main(void) {
 
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {
-        free(strings[i]);
+        // free(strings[i]);
         free(matches[i]);
         free(missingMatches[i]);
     }
@@ -80,7 +80,7 @@ int main(void) {
         // free(missingAnagrams[i]);
     }
     
-    free(strings);
+    // free(strings);
     free(strings[nLines]);
     free(matches);
     // free(anagrams);
