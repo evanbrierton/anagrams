@@ -130,10 +130,7 @@ int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, c
   matches[nAnagrams][0] = -1;
 
   // Deallocate memory
-  for (size_t i = 0; i < nLines; i++) {
-    free(map[i]);
-    free(matches[i]);
-  }
+  for (size_t i = 0; i < nLines; i++)free(map[i]);
   free(map);
   free(matched);
 
