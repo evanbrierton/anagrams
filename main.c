@@ -65,13 +65,19 @@ int main(void) {
     // Appends the formatted list of missingAnagrams to the output
     appendToOutput("output.txt", "Missing Anagrams:");
     appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
-    
+
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {
         free(strings[i]);
         free(matches[i]);
         free(missingMatches[i]);
+        if (i < maxNAnagrams)
+        {
+            free(anagrams[i]);
+            free(missingAnagrams[i]);
+        }
     }
+    
     free(strings);
     free(matches);
     free(anagrams);
