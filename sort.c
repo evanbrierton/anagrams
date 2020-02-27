@@ -5,10 +5,13 @@
 
 // Function to compare two strings alphabetically disregarding case and punctuation
 bool compare(string str1, string str2) {
-  string cleanedString1 = toLowerCase(cleanString(str1)), cleanedString2 = toLowerCase(cleanString(str2));
+  string cleanedString1 = cleanString(str1), cleanedString2 = cleanString(str2);
+  string cleanedLowerCaseString1 = toLowerCase(cleanedString1), cleanedLowerCaseString2 = toLowerCase(cleanedString2);
   bool str1LessThanStr2 = strncmp(cleanedString1, cleanedString2, strlen(str1)) < 0;
   free(cleanedString1);
   free(cleanedString2);
+  free(cleanedLowerCaseString1);
+  free(cleanedLowerCaseString2);
   return str1LessThanStr2;
 }
 
