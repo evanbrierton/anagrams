@@ -34,7 +34,7 @@ int main(void) {
     sort(strings, 0, (size_t)(nLines - 1), toLowerCase);
     // Append sorted list of strings to the output file
     appendToOutput("output.txt", "The sorted list of words follows:");
-    appendListToOutput("output.txt", nLines, strings, false);
+    appendListToOutput("output.txt", nLines, strings);
     appendToOutput("output.txt", "");
 
     /* == Anagrams == */
@@ -49,7 +49,7 @@ int main(void) {
     size_t nAnagrams = formatAnagrams(strings, anagrams, matches, maxAnagramLength);
     // Appends the formatted list of anagrams to the output
     appendToOutput("output.txt", "Anagrams:");
-    appendListToOutput("output.txt", nAnagrams, anagrams, true);
+    appendListToOutput("output.txt", nAnagrams, anagrams);
     appendToOutput("output.txt", "");
 
     /* == Would Be Anagrams == */
@@ -64,7 +64,7 @@ int main(void) {
     size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, missingMatches, maxAnagramLength);
     // Appends the formatted list of missingAnagrams to the output
     appendToOutput("output.txt", "Missing Anagrams:");
-    appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams, true);
+    appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
     
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {
