@@ -5,9 +5,6 @@
 #include "sort.h"
 #include "anagrams.h"
 
-#include <stdio.h>
-
-
 int main(void) {
     /* == Setup == */
 
