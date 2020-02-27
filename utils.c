@@ -72,5 +72,6 @@ string toLowerCase(string str) {
 /* A function to return the difference in length between two strings, ignoring certain characters
 defined in the cleanString function */
 size_t getStringDiff(string str1, string str2) {
-  return abs((int)strlen(cleanString(str1)) - (int)strlen(cleanString(str2)));
+  string cleanedString1 = cleanString(str1), cleanedString2 = cleanString(str2);
+  return abs((int)strlen(cleanedString1) - (int)strlen(cleanedString2));
 }
