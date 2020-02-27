@@ -18,7 +18,7 @@ int main(void) {
     requires at least one pair */
     const size_t maxNAnagrams = nLines / 2;
     /* Set the maximum length of any given anagram to the longestLineLength + 3 to account for
-    the longest possible individual string with quotation marks and a space, multiplied by nLines
+    the longest possible individual char * with quotation marks and a space, multiplied by nLines
     to account for the maximum number of strings in any given anagram, adding 10 for the prefix
     "Anagram:" and adding floor(log10(maxNAnagrams) + 1) to account for the number of digits in the
     prefixed number */
@@ -27,11 +27,11 @@ int main(void) {
     /* == Input and Sort == */
 
     // Initialise strings to a new string array of dimensions (nLines + 1) * longestLineLength
-    string * strings = newStringArray(nLines + 1, longestLineLength);
+    char ** strings = newStringArray(nLines + 1, longestLineLength);
     // Feed the input from the text file into strings
     getInput("input.txt", strings, longestLineLength);
     // Sort strings alphabetically (case insensitive)
-    sort(strings, 0, (size_t)(nLines - 1), toLowerCase);
+    sort(strings, 0, (size_t)(nLines - 1));
     // Append sorted list of strings to the output file
     appendToOutput("output.txt", "The sorted list of words follows:");
     appendListToOutput("output.txt", nLines, strings);
@@ -43,7 +43,7 @@ int main(void) {
     with each-other */
     int ** matches = getAnagrams(strings, isAnagram, nLines, longestLineLength);
     // Initialise anagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    string * anagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    char ** anagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array */
     size_t nAnagrams = formatAnagrams(strings, anagrams, matches, maxAnagramLength);
@@ -58,7 +58,7 @@ int main(void) {
     with each-other given the constraints */
     int ** missingMatches = getAnagrams(strings, isMissingAnagram, nLines, longestLineLength);
     // Initialise missingAnagrams to a string array of dimensions maxNAnagrams * maxAnagramLength
-    string * missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
+    char ** missingAnagrams = newStringArray(maxNAnagrams, maxAnagramLength);
     /* Formats the anagrams to be appended to the output and feeds the formatted anagrams back into
     the anagrams array while returning th number of pairings */
     size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, missingMatches, maxAnagramLength);

@@ -5,7 +5,7 @@
 #include "utils.h"
 
 // Function to clear all text from a file
-void clearFile(const string file) {
+void clearFile(const char * file) {
     /* Initialise fp to a pointer to the file to be wiped, opening with the "w" flag also clears
     the file */
     FILE * fp = fopen(file, "w");
@@ -17,7 +17,7 @@ void clearFile(const string file) {
 }
 
 // Function to calculate the number of lines in an input file
-size_t getNLines(const string file) {
+size_t getNLines(const char * file) {
     // Initialise variable to track the number of lines in the file
     size_t lines = 0;
 
@@ -43,7 +43,7 @@ size_t getNLines(const string file) {
 }
 
 // Function to return the length of the longest line in the input file
-size_t getLongestLineLengthLength(const string file) {
+size_t getLongestLineLengthLength(const char *file) {
     /* Initialise variables to track the length of the current line being read and the maximum
     length read so far; */
     size_t length = 0, max = 0;
@@ -70,7 +70,7 @@ size_t getLongestLineLengthLength(const string file) {
 }
 
 // Function to read input from a text file and output each line to a string array
-void getInput(const string input, string * target, size_t lineLength) {
+void getInput(const char * input, char ** target, size_t lineLength) {
     // Initialise fp to a pointer to the input file
     FILE * fp = fopen(input, "r");
     // Check if  file has been found
@@ -85,7 +85,7 @@ void getInput(const string input, string * target, size_t lineLength) {
 }
 
 // Function to append a line of text to the output file
-void appendToOutput(const string output, const string string) {
+void appendToOutput(const char * output, const char * string) {
     // Initialise fp to a pointer to the output file in append mode
     FILE * fp = fopen(output, "a");
     // Check if file has been found
@@ -99,7 +99,7 @@ void appendToOutput(const string output, const string string) {
 }
 
 // Function to append an array of strings to the output file
-void appendListToOutput(const string output, size_t lines, string * strings) {
+void appendListToOutput(const char * output, size_t lines, char ** strings) {
     // For each string in the array call appendToOutput on the string
     for (size_t i = 0; i < lines; i++) appendToOutput(output, strings[i]);
 }

@@ -6,7 +6,7 @@
 
 /* Function to count the number of each letter in a string and store the count in a corresponding
 array index */
-size_t * countLetters(string str) {
+size_t * countLetters(char * str) {
   // Initialise a counter array of length 26 and set each value within it to 0
   size_t * counter = calloc(26, sizeof(size_t));
   // Iterate through each character in the string
@@ -19,14 +19,14 @@ size_t * countLetters(string str) {
 }
 
 // Function to generate counter array for each string
-size_t ** generateMap(string * strings, size_t nLines, size_t cutoff) {
+size_t ** generateMap(char ** strings, size_t nLines, size_t cutoff) {
   // Allocate enough memory to the map to contain a counter array for each string
   size_t ** map = malloc(nLines * sizeof(size_t*));
   // Iterate over each string
   for (size_t i = 0; i < nLines; i++)
   {
     // Converts each string to one containing only alphabetical characters
-    string cleanedString = cleanString(strings[i]);
+    char * cleanedString = cleanString(strings[i]);
     // Allocates enough memory to each index of the map to contain a single counter array
     map[i] = malloc(26 * sizeof(size_t));
     // Ignores all characters in the string past the cutoff point
@@ -43,7 +43,7 @@ size_t ** generateMap(string * strings, size_t nLines, size_t cutoff) {
 
 /* Function to determine whether two strings are anagrams of each-other using their indices within
 the generated map */
-bool isAnagram(size_t a, size_t b, size_t ** map, string * strings)
+bool isAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 {
   /* Preemptively eliminate strings that are not the same length when non-alphabetical characters
   have been removes */
@@ -55,7 +55,7 @@ bool isAnagram(size_t a, size_t b, size_t ** map, string * strings)
 
 /* Function to determine whether two strings would be anagrams of each-other if n characters was
 removed from the end of one of them */
-bool isMissingAnagram(size_t a, size_t b, size_t ** map, string * strings)
+bool isMissingAnagram(size_t a, size_t b, size_t ** map, char ** strings)
 {
   /* Preemptively eliminate all strings of the same length as these have been dealt with in
   isAnagram() */
@@ -68,7 +68,7 @@ bool isMissingAnagram(size_t a, size_t b, size_t ** map, string * strings)
 }
 
 // Function to obtain the list of both anagrams and missingAnagrams
-int ** getAnagrams(string * strings, bool (*compare)(size_t, size_t, size_t **, string * strings), size_t nLines, size_t longestLineLength)
+int ** getAnagrams(char ** strings, bool (*compare)(size_t, size_t, size_t **, char ** strings), size_t nLines, size_t longestLineLength)
 {
 
   /* Initialise a 2D Integer array that stores a representation of each anagram match as a list
@@ -96,9 +96,9 @@ int ** getAnagrams(string * strings, bool (*compare)(size_t, size_t, size_t **, 
     if(!(matched[i]))
     {
       /* If the function is looking for missingAnagrams a new map is needed for each string, with
-      the cutoff being the length of said string */
+      the cutoff being the length of said char **/
       if (compare == isMissingAnagram) {
-        string cleanedString = cleanString(strings[i]);
+        char *cleanedString = cleanString(strings[i]);
         map = generateMap(strings, nLines, strlen(cleanedString));
         free(cleanedString);
       }
@@ -145,7 +145,7 @@ int ** getAnagrams(string * strings, bool (*compare)(size_t, size_t, size_t **, 
 }
 
 // Function to format the list of anagrams for printing to the output file
-size_t formatAnagrams(string * strings, string * target, int ** matches, size_t maxLength) {
+size_t formatAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
     // Initialise a counter to keep track of the number of anagrams generated
     size_t i;
     // Iterate over the matches array
@@ -162,7 +162,7 @@ size_t formatAnagrams(string * strings, string * target, int ** matches, size_t 
 }
 
 // Function to format the missingAnagrams for printing and return the number formatted
-size_t formatMissingAnagrams(string * strings, string * target, int ** matches, size_t maxLength) {
+size_t formatMissingAnagrams(char ** strings, char ** target, int ** matches, size_t maxLength) {
     // Initialise a counter to keep track of the number of missingAnagrams generated
     size_t currentLength = 0;
     // Iterate over the matches array
