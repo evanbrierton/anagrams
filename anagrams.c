@@ -145,11 +145,14 @@ size_t formatAnagrams(string * strings, string * target, int ** matches, size_t 
     // Iterate over the matches array
     for (i = 0; matches[i][0] >= 0; i++) {
       // Append the root word to the beginning of the string
-      snprintf(target[i], maxLength, "Anagram %zu: \"%s\"", i + 1, strings[matches[i][0]]);
+      string formattedString = newString(maxLength);
+      snprintf(formattedString, maxLength, "Anagram %zu: \"%s\"", i + 1, strings[matches[i][0]]);
       for (size_t j = 1; matches[i][j] >= 0; j++) {
         // Append every other word to the string
-        snprintf(target[i], maxLength, "%s \"%s\"", target[i], strings[matches[i][j]]);
+        snprintf(formattedString, maxLength, "%s \"%s\"", formattedString, strings[matches[i][j]]);
       }
+      strcpy(target[i], formattedString);
+      free(formattedString);
     }
     // Return the count
     return i;
