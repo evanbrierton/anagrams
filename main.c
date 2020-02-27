@@ -77,7 +77,7 @@ int main(void) {
     }
     for (size_t i = 0; i < maxNAnagrams; i++) {
         // free(anagrams[i]);
-        free(missingAnagrams[i]);
+        // free(missingAnagrams[i]);
     }
     
     free(strings);
@@ -85,7 +85,7 @@ int main(void) {
     free(matches);
     // free(anagrams);
     free(missingMatches);
-    free(missingAnagrams);
+    // free(missingAnagrams);
 
     return 0;
 }
