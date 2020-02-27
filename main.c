@@ -80,7 +80,7 @@ int main(void) {
         free(missingAnagrams[i]);
     }
     
-    // free(strings);
+    free(strings);
     free(strings[nLines]);
     free(matches);
     free(anagrams);
