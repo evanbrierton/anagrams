@@ -5,15 +5,23 @@
 #include "sort.h"
 #include "anagrams.h"
 
+#include <stdio.h>
+
+#define INPUT "input.txt"
+// Output is in build directory, change to "../output" to output to source directory
+#define OUTPUT "output.txt"
+#define ERROR "error.txt"
+
 int main(void) {
     /* == Setup == */
-
-    // Clear the output file
-    clearFile("output.txt");
+    
+    // Clear the output files
+    clearFile(ERROR);
+    clearFile(OUTPUT);
     // Get the number of lines in the input file
-    const size_t nLines = getNLines("input.txt");
+    const size_t nLines = getNLines(INPUT);
     // Get the length of the longest line in the input file
-    const size_t longestLineLength = getLongestLineLengthLength("input.txt");
+    const size_t longestLineLength = getLongestLineLengthLength(INPUT);
     /* Set the maximum number of anagrams to the number of lines divided by two as each anagram
     requires at least one pair */
     const size_t maxNAnagrams = nLines / 2;
@@ -29,13 +37,13 @@ int main(void) {
     // Initialise strings to a new string array of dimensions (nLines + 1) * longestLineLength
     char ** strings = newStringArray(nLines + 1, longestLineLength);
     // Feed the input from the text file into strings
-    getInput("input.txt", strings, longestLineLength);
+    getInput(INPUT, strings, longestLineLength);
     // Sort strings alphabetically (case insensitive)
     sort(strings, 0, (size_t)(nLines - 1));
     // Append sorted list of strings to the output file
-    appendToOutput("output.txt", "The sorted list of words follows:");
-    appendListToOutput("output.txt", nLines, strings);
-    appendToOutput("output.txt", "");
+    appendToOutput(OUTPUT, "The sorted list of words follows:");
+    appendListToOutput(OUTPUT, nLines, strings);
+    appendToOutput(OUTPUT, "");
 
     /* == Anagrams == */
 
@@ -48,9 +56,9 @@ int main(void) {
     the anagrams array */
     size_t nAnagrams = formatAnagrams(strings, anagrams, matches, maxAnagramLength);
     // Appends the formatted list of anagrams to the output
-    appendToOutput("output.txt", "Anagrams:");
-    appendListToOutput("output.txt", nAnagrams, anagrams);
-    appendToOutput("output.txt", "");
+    appendToOutput(OUTPUT, "Anagrams:");
+    appendListToOutput(OUTPUT, nAnagrams, anagrams);
+    appendToOutput(OUTPUT, "");
 
     /* == Would Be Anagrams == */
 
@@ -63,8 +71,8 @@ int main(void) {
     the anagrams array while returning th number of pairings */
     size_t nMissingAnagrams = formatMissingAnagrams(strings, missingAnagrams, missingMatches, maxAnagramLength);
     // Appends the formatted list of missingAnagrams to the output
-    appendToOutput("output.txt", "Missing Anagrams:");
-    appendListToOutput("output.txt", nMissingAnagrams, missingAnagrams);
+    appendToOutput(OUTPUT, "Missing Anagrams:");
+    appendListToOutput(OUTPUT, nMissingAnagrams, missingAnagrams);
 
     // Deallocate memory
     for (size_t i = 0; i < nLines; i++) {

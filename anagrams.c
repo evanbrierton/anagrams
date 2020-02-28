@@ -177,9 +177,9 @@ size_t formatMissingAnagrams(char ** strings, char ** target, int ** matches, si
           target[currentLength],
           maxLength,
           "Missing Anagram %zu: \"%s\" is an anagram of \"%s\" if %zu character%s removed",
-          currentLength + 1, 
-          strings[matches[i][0]],
+          currentLength + 1,
           strings[matches[i][j]],
+          strings[matches[i][0]],
           difference,
           difference == 1 ? " is" : "s are"
         );
